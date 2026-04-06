@@ -17,7 +17,7 @@
     <meta name="twitter:title" content="@yield('og_title', config('app.name'))">
     <meta name="twitter:description" content="@yield('og_description', 'Description par défaut')">
     <meta name="twitter:image" content="@yield('og_image', asset('images/preview.jpg'))">
-    <link rel="icon" href="{{asset('favicon.ico')}}">
+    <link rel="icon" href="{{asset('storage/favicon.ico')}}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
