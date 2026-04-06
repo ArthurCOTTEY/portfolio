@@ -216,19 +216,33 @@
                 </div>
             </div>
             <div class="md:col-span-8 p-8 md:p-12 bg-white">
-                <form method="POST" action="/contact" class="space-y-6">
+                <form id="contactForm" method="POST" action="/contact" class="space-y-6">
                     @csrf
                     <div>
-                        <label class="block text-sm font-sans mb-1" for="name">Nom</label>
-                        <input type="text" name="name" id="name" class="w-full border-2 border-black p-3 outline-none focus:bg-gray-100">
+                        <label class="block text-sm font-sans mb-1" for="name">
+                            Nom <span class="text-red-500">*</span>
+                        </label>
+                        <input type="text" name="name" required id="name"
+                               class="w-full border-2 border-black p-3 outline-none focus:bg-gray-100 transition-all duration-200">
+                        <p class="text-red-500 text-sm mt-1 hidden opacity-0 transition-all duration-300" id="error-name"></p>
                     </div>
+
                     <div>
-                        <label class="block text-sm font-sans mb-1" for="email">Email</label>
-                        <input type="email" name="email" id="email" class="w-full border-2 border-black p-3 outline-none focus:bg-gray-100">
+                        <label class="block text-sm font-sans mb-1" for="name">
+                            Nom <span class="text-red-500">*</span>
+                        </label>
+                        <input type="email" required name="email" id="email"
+                               class="w-full border-2 border-black p-3 outline-none focus:bg-gray-100 transition-all duration-200">
+                        <p class="text-red-500 text-sm mt-1 hidden opacity-0 transition-all duration-300" id="error-email"></p>
                     </div>
+
                     <div>
-                        <label class="block text-sm font-sans mb-1" for="message">Message</label>
-                        <textarea name="message" id="message" rows="5" class="w-full border-2 border-black p-3 outline-none focus:bg-gray-100"></textarea>
+                        <label class="block text-sm font-sans mb-1" for="message">
+                            Message <span class="text-red-500">*</span>
+                        </label>
+                        <textarea name="message" id="message" required rows="5"
+                                  class="w-full border-2 border-black p-3 outline-none focus:bg-gray-100 transition-all duration-200"></textarea>
+                        <p class="text-red-500 text-sm mt-1 hidden opacity-0 transition-all duration-300" id="error-message"></p>
                     </div>
                     <button type="submit" class="border-2 border-black px-6 py-3 text-sm font-medium hover:bg-black hover:text-white">
                         Envoyer
@@ -248,4 +262,10 @@
             </div>
         </div>
     </section>
+    <div id="toast" class="fixed bottom-5 left-1/2 -translate-x-1/2 hidden z-50">
+        <div id="toastContent"
+             class="px-6 py-4 rounded shadow-lg text-white font-medium transform transition-all duration-300 translate-y-full opacity-0">
+            Message ici
+        </div>
+    </div>
 @endsection
