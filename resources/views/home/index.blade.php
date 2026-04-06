@@ -229,7 +229,7 @@
 
                     <div>
                         <label class="block text-sm font-sans mb-1" for="name">
-                            Nom <span class="text-red-500">*</span>
+                            Email <span class="text-red-500">*</span>
                         </label>
                         <input type="email" required name="email" id="email"
                                class="w-full border-2 border-black p-3 outline-none focus:bg-gray-100 transition-all duration-200">
@@ -253,7 +253,7 @@
     </section>
     <section class="border-b-2 border-black overflow-hidden bg-black text-white">
         <div class="marquee">
-            <div class="marquee-content flex items-center gap-12 py-4">
+            <div class="marquee-content marqueeEnd flex items-center gap-12 py-4">
                 @for($i = 0; $i < 15; $i++)
                     <span class="font-display text-xl font-bold whitespace-nowrap">
                         Imagine • Build • Create • Learn

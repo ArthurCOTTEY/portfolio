@@ -52,3 +52,7 @@ a {
 .shake {
     animation: shake 0.3s ease;
 }
+
+.marqueeEnd {
+    animation: marquee 20s linear infinite;
+}

@@ -25,7 +25,14 @@ class ContactController extends Controller
             'message.min' => 'Le message doit contenir au moins 5 caractères.',
         ]);
 
-        Mail::to('arthur.cottey1@gmail.com')->send(new ContactMail($validated));
+        Mail::raw(
+            "Nom: {$validated['name']}\nEmail: {$validated['email']}\nMessage:\n{$validated['message']}",
+            function ($message) use ($validated) {
+                $message->to('arthur.cottey1@gmail.com')
+                    ->subject('Contact site')
+                    ->replyTo($validated['email']);
+            }
+        );
 
         return response()->json([
             'success' => true,
