@@ -24,7 +24,7 @@ btn.addEventListener('click', () => {
     spans[2].classList.toggle('-translate-y-1.5');
 });
 
-document.getElementById('contactForm').addEventListener('submit', function(e) {
+document.getElementById('contactForm').addEventListener('submit', function (e) {
     e.preventDefault();
 
     let form = this;
@@ -133,3 +133,157 @@ function showToast(message, type = 'success') {
 
     }, 3000);
 }
+
+
+    const cookieBanner = document.getElementById('cookieBanner')
+    const cookieModal = document.getElementById('cookieModal')
+
+    const manageCookiesBtn = document.getElementById('manageCookies')
+    const closeCookieModalBtn = document.getElementById('closeCookieModal')
+
+    const acceptCookiesBtn = document.getElementById('acceptCookies')
+    const refuseCookiesBtn = document.getElementById('refuseCookies')
+
+    const saveCookiePreferencesBtn = document.getElementById('saveCookiePreferences')
+    const acceptAllCookiesBtn = document.getElementById('acceptAllCookies')
+    const rejectAllCookiesBtn = document.getElementById('rejectAllCookies')
+
+    const analyticsCookiesInput = document.getElementById('analyticsCookies')
+    const marketingCookiesInput = document.getElementById('marketingCookies')
+
+    function openCookieModal() {
+    cookieModal.classList.remove('hidden')
+    cookieModal.classList.add('flex')
+}
+
+    function closeCookieModal() {
+    cookieModal.classList.add('hidden')
+    cookieModal.classList.remove('flex')
+}
+
+    function hideCookieBanner() {
+    cookieBanner.parentElement.classList.add('hidden')
+    document.body.style.paddingBottom = '0px'
+}
+
+    function showCookieBanner() {
+    cookieBanner.parentElement.classList.remove('hidden')
+    document.body.style.paddingBottom = cookieBanner.offsetHeight + 'px'
+}
+
+    function saveCookieConsent(preferences) {
+    localStorage.setItem('cookieChoice', JSON.stringify(preferences))
+}
+
+    function getCookieConsent() {
+    const consent = localStorage.getItem('cookieChoice')
+    return consent ? JSON.parse(consent) : null
+}
+
+    function applySavedPreferences() {
+    const consent = getCookieConsent()
+
+    if (!consent) {
+    showCookieBanner()
+    return
+}
+
+    analyticsCookiesInput.checked = !!consent.analytics
+    marketingCookiesInput.checked = !!consent.marketing
+
+    hideCookieBanner()
+}
+
+    manageCookiesBtn.addEventListener('click', () => {
+    openCookieModal()
+})
+
+    closeCookieModalBtn.addEventListener('click', () => {
+    closeCookieModal()
+})
+
+    acceptCookiesBtn.addEventListener('click', () => {
+    saveCookieConsent({
+        necessary: true,
+        analytics: true,
+        marketing: true,
+        status: 'accepted'
+    })
+
+    analyticsCookiesInput.checked = true
+    marketingCookiesInput.checked = true
+
+    hideCookieBanner()
+})
+
+    refuseCookiesBtn.addEventListener('click', () => {
+    saveCookieConsent({
+        necessary: true,
+        analytics: false,
+        marketing: false,
+        status: 'refused'
+    })
+
+    analyticsCookiesInput.checked = false
+    marketingCookiesInput.checked = false
+
+    hideCookieBanner()
+})
+
+    saveCookiePreferencesBtn.addEventListener('click', () => {
+    saveCookieConsent({
+        necessary: true,
+        analytics: analyticsCookiesInput.checked,
+        marketing: marketingCookiesInput.checked,
+        status: 'custom'
+    })
+
+    hideCookieBanner()
+    closeCookieModal()
+})
+
+    acceptAllCookiesBtn.addEventListener('click', () => {
+    analyticsCookiesInput.checked = true
+    marketingCookiesInput.checked = true
+
+    saveCookieConsent({
+    necessary: true,
+    analytics: true,
+    marketing: true,
+    status: 'accepted'
+})
+
+    hideCookieBanner()
+    closeCookieModal()
+})
+
+    rejectAllCookiesBtn.addEventListener('click', () => {
+    analyticsCookiesInput.checked = false
+    marketingCookiesInput.checked = false
+
+    saveCookieConsent({
+    necessary: true,
+    analytics: false,
+    marketing: false,
+    status: 'refused'
+})
+
+    hideCookieBanner()
+    closeCookieModal()
+})
+
+    cookieModal.addEventListener('click', (e) => {
+    if (e.target === cookieModal) {
+    closeCookieModal()
+}
+})
+
+    window.addEventListener('load', () => {
+    applySavedPreferences()
+})
+
+    window.addEventListener('resize', () => {
+    if (!localStorage.getItem('cookieChoice') && !cookieBanner.parentElement.classList.contains('hidden')) {
+    document.body.style.paddingBottom = cookieBanner.offsetHeight + 'px'
+}
+})
