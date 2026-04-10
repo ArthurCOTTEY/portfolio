@@ -58,7 +58,7 @@ document.getElementById('contactForm').addEventListener('submit', function (e) {
             return data;
         })
         .then(data => {
-            showToast(data.message || "Message envoyé !");
+            showToast(data.message || window.i18n.contact_section.success || "Message envoyé !");
             form.reset();
         })
         .catch(error => {
@@ -71,28 +71,28 @@ document.getElementById('contactForm').addEventListener('submit', function (e) {
                         // 🔴 Bordure rouge + animation
                         input.classList.add('border-red-500', 'shake');
 
-                        // relancer le shake si revalidation
                         setTimeout(() => {
                             input.classList.remove('shake');
                         }, 300);
                     }
 
                     if (errorEl) {
-                        // 💬 Message erreur
-                        errorEl.textContent = error.errors[field][0];
+                        // 💬 Message erreur (backend si dispo sinon fallback i18n)
+                        errorEl.textContent =
+                            error.errors[field][0] ||
+                            window.i18n.contact_section.errors?.[field] ||
+                            "Erreur";
 
-                        // reset état
                         errorEl.classList.remove('hidden');
                         errorEl.classList.add('opacity-0');
 
-                        // ✨ animation fade-in
                         setTimeout(() => {
                             errorEl.classList.remove('opacity-0');
                         }, 10);
                     }
                 });
             } else {
-                showToast("Une erreur est survenue", 'error');
+                showToast(window.i18n.contact_section.error || "Une erreur est survenue", 'error');
             }
         });
 });

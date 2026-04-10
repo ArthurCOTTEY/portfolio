@@ -8,6 +8,9 @@
     <meta name="robots" content="index, follow">
     <meta name="author" content="{{config('app.name')}}">
     <link rel="canonical" href="{{ url()->current() }}" />
+    <link rel="alternate" hreflang="fr" href="{{ url('/fr') }}">
+    <link rel="alternate" hreflang="en" href="{{ url('/en') }}">
+    <link rel="alternate" hreflang="x-default" href="{{ url('/en') }}">
     <meta property="og:title" content="@yield('og_title', config('app.name'))">
     <meta property="og:description" content="@yield('og_description', 'Description par défaut')">
     <meta property="og:type" content="website">

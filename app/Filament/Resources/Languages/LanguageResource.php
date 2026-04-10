@@ -9,6 +9,7 @@ use App\Filament\Resources\Languages\Schemas\LanguageForm;
 use App\Filament\Resources\Languages\Tables\LanguagesTable;
 use App\Models\Language;
 use BackedEnum;
+use Doriiaan\FilamentAstrotomic\Resources\Concerns\ResourceTranslatable;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
@@ -16,6 +17,8 @@ use Filament\Tables\Table;
 
 class LanguageResource extends Resource
 {
+    use ResourceTranslatable;
+
     protected static ?string $model = Language::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;

@@ -1,8 +1,26 @@
 <?php
 
-use App\Http\Controllers\ContactController;
-use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ContactController;
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::post('/contact', [ContactController::class, 'store']);
+Route::get('/', function (Request $request) {
+
+    $locale = session('locale')
+        ?? substr($request->getPreferredLanguage(['fr', 'en']), 0, 2)
+        ?? 'fr';
+
+    if (!in_array($locale, ['fr', 'en'])) {
+        $locale = 'fr';
+    }
+
+    return redirect("/$locale");
+});
+
+Route::group(['prefix' => '{locale}'], function () {
+
+    Route::get('/', [HomeController::class, 'index'])->name('home');
+
+    Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+});

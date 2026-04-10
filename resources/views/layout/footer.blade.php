@@ -1,10 +1,8 @@
 <footer class="border-t-2 border-black bg-white">
 
     <div class="flex flex-col md:flex-row items-center justify-between gap-6 p-6 md:p-8">
-
-        <!-- LEFT -->
         <div class="text-sm font-sans text-gray-600 text-center md:text-left">
-            © {{ date('Y') }} Arthur Cottey — Développeur Full Stack
+            © {{ date('Y') }} Arthur Cottey — {{ __('home.footer.copyright') }}
         </div>
 
         <!-- RIGHT -->
@@ -33,6 +31,21 @@
                 @
 
             </a>
+
+            <a href="{{ url('/fr') }}"
+               class="w-10 h-10 border-2 border-black flex items-center justify-center text-xs font-sans
+       transition hover:bg-black hover:text-white
+       {{ app()->getLocale() === 'fr' ? 'bg-black text-white' : '' }}">
+                FR
+            </a>
+
+            <a href="{{ url('/en') }}"
+               class="w-10 h-10 border-2 border-black flex items-center justify-center text-xs font-sans
+       transition hover:bg-black hover:text-white
+       {{ app()->getLocale() === 'en' ? 'bg-black text-white' : '' }}">
+                EN
+            </a>
+
             <a href="#"
                id="openCookieModalLink"
                class="w-10 h-10 border-2 border-black flex items-center justify-center hover:bg-black hover:text-white">

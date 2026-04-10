@@ -1,21 +1,32 @@
 <div class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-7xl border-l-2 border-r-2 border-black">
     <div id="cookieBanner" class="bg-white border-t-2 border-black p-6 z-50">
+
         <div class="max-w-6xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+
             <p class="font-sans text-sm max-w-2xl">
-                Ce site utilise des cookies pour améliorer l’expérience utilisateur.
+                {{ __('home.cookies.text') }}
             </p>
+
             <div class="flex gap-4">
-                <button id="acceptCookies" class="border-2 border-black px-5 py-2 text-sm font-medium bg-green-500 text-white hover:bg-black">
-                    Toute accepter
+
+                <button id="acceptCookies"
+                        class="border-2 border-black px-5 py-2 text-sm font-medium bg-green-500 text-white hover:bg-black">
+                    {{ __('home.cookies.accept') }}
                 </button>
-                <button id="refuseCookies" class="border-2 border-black px-5 py-2 text-sm font-medium hover:bg-black hover:text-white">
-                    Refuser
+
+                <button id="refuseCookies"
+                        class="border-2 border-black px-5 py-2 text-sm font-medium hover:bg-black hover:text-white">
+                    {{ __('home.cookies.refuse') }}
                 </button>
-                <button id="manageCookies" class="border-2 border-black px-5 py-2 text-sm font-medium bg-yellow-400 hover:bg-black hover:text-white">
-                    Gérer
+
+                <button id="manageCookies"
+                        class="border-2 border-black px-5 py-2 text-sm font-medium bg-yellow-400 hover:bg-black hover:text-white">
+                    {{ __('home.cookies.manage') }}
                 </button>
+
             </div>
         </div>
+
     </div>
 </div>
 <div id="cookieWrapper" class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-7xl border-l-2 border-r-2 border-black z-50 hidden">
@@ -38,51 +49,81 @@
         </div>
     </div>
 </div>
-<div id="cookieModal" class="fixed inset-0 bg-black/40 z-[60] hidden items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="cookieModalTitle">
+<div id="cookieModal"
+      class="fixed inset-0 bg-black/40 z-[60] hidden items-center justify-center p-4"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="cookieModalTitle">
+
     <div class="w-full max-w-2xl bg-white border-2 border-black shadow-xl">
+
+        <!-- HEADER -->
         <div class="flex items-center justify-between border-b-2 border-black p-6">
+
             <h2 id="cookieModalTitle" class="font-display text-2xl md:text-3xl font-bold tracking-tight">
-                Gérer les cookies
+                {{ __('home.cookie_modal.title') }}
             </h2>
-            <button id="closeCookieModal" type="button" aria-label="Fermer la fenêtre" class="border-2 border-black px-3 py-1 text-sm font-medium hover:bg-black hover:text-white transition">
+
+            <button id="closeCookieModal"
+                    type="button"
+                    aria-label="{{ __('home.cookie_modal.close') }}"
+                    class="border-2 border-black px-3 py-1 text-sm font-medium hover:bg-black hover:text-white transition">
                 ✕
             </button>
+
         </div>
+
+        <!-- CONTENT -->
         <div class="p-6 space-y-6">
+
             <p class="font-sans text-sm leading-relaxed">
-                Nous utilisons des cookies pour améliorer votre expérience et mesurer l’audience.
-                Vous pouvez accepter, refuser ou personnaliser votre choix à tout moment.
+                {{ __('home.cookie_modal.description') }}
+
                 <a href="/politique-de-confidentialite" class="underline font-medium">
-                    En savoir plus
+                    {{ __('home.cookie_modal.learn_more') }}
                 </a>.
             </p>
+
+            <!-- NECESSARY -->
             <div class="border-2 border-black">
+
                 <div class="border-b-2 border-black p-4 bg-gray-100">
+
                     <div class="flex items-start justify-between gap-4">
+
                         <div>
                             <h3 class="font-display text-lg font-bold">
-                                Cookies nécessaires
+                                {{ __('home.cookie_modal.necessary_title') }}
                             </h3>
+
                             <p class="mt-1 font-sans text-sm text-gray-700">
-                                Indispensables au fonctionnement du site. Ils ne peuvent pas être désactivés.
+                                {{ __('home.cookie_modal.necessary_desc') }}
                             </p>
                         </div>
+
                         <span class="border-2 border-black px-3 py-1 text-xs font-medium bg-black text-white whitespace-nowrap">
-                            Toujours actifs
+                            {{ __('home.cookie_modal.always_active') }}
                         </span>
+
                     </div>
                 </div>
             </div>
+
+            <!-- ANALYTICS -->
             <div class="border-2 border-black p-4">
+
                 <div class="flex items-start justify-between gap-4">
+
                     <div>
                         <h3 class="font-display text-lg font-bold">
-                            Cookies analytiques
+                            {{ __('home.cookie_modal.analytics_title') }}
                         </h3>
+
                         <p class="mt-1 font-sans text-sm text-gray-700">
-                            Mesurent l’audience et améliorent le site (Google Analytics).
+                            {{ __('home.cookie_modal.analytics_desc') }}
                         </p>
                     </div>
+
                     <label class="inline-flex items-center cursor-pointer select-none group">
                         <input id="analyticsCookies" type="checkbox" class="sr-only peer">
 
@@ -90,19 +131,30 @@
                             <span class="absolute top-1/2 left-1 block w-4 h-4 bg-black transition-all duration-200 ease-out -translate-y-1/2 group-has-[input:checked]:translate-x-6 group-has-[input:checked]:bg-white"></span>
                         </div>
                     </label>
+
                 </div>
             </div>
         </div>
+
+        <!-- FOOTER -->
         <div class="border-t-2 border-black p-6 flex flex-wrap gap-4 justify-end">
-            <button id="rejectAllCookies" type="button" class="border-2 border-black px-5 py-2 text-sm font-medium hover:bg-black hover:text-white transition">
-                Tout refuser
+
+            <button id="rejectAllCookies" type="button"
+                    class="border-2 border-black px-5 py-2 text-sm font-medium hover:bg-black hover:text-white transition">
+                {{ __('home.cookie_modal.reject_all') }}
             </button>
-            <button id="saveCookiePreferences" type="button" class="border-2 border-black px-5 py-2 text-sm font-medium bg-yellow-400 hover:bg-black hover:text-white transition">
-                Sauvegarder
+
+            <button id="saveCookiePreferences" type="button"
+                    class="border-2 border-black px-5 py-2 text-sm font-medium bg-yellow-400 hover:bg-black hover:text-white transition">
+                {{ __('home.cookie_modal.save') }}
             </button>
-            <button id="acceptAllCookies" type="button" class="border-2 border-black px-5 py-2 text-sm font-medium bg-green-500 text-white hover:bg-black transition">
-                Tout accepter
+
+            <button id="acceptAllCookies" type="button"
+                    class="border-2 border-black px-5 py-2 text-sm font-medium bg-green-500 text-white hover:bg-black transition">
+                {{ __('home.cookie_modal.accept_all') }}
             </button>
+
         </div>
+
     </div>
 </div>
