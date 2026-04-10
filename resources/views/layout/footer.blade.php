@@ -1,10 +1,8 @@
 <footer class="border-t-2 border-black bg-white">
 
     <div class="flex flex-col md:flex-row items-center justify-between gap-6 p-6 md:p-8">
-
-        <!-- LEFT -->
         <div class="text-sm font-sans text-gray-600 text-center md:text-left">
-            © {{ date('Y') }} Arthur Cottey — Développeur Full Stack
+            © {{ date('Y') }} Arthur Cottey — {{ __('home.footer.copyright') }}
         </div>
 
         <!-- RIGHT -->
