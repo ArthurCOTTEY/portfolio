@@ -31,6 +31,21 @@
                 @
 
             </a>
+
+            <a href="{{ url('/fr') }}"
+               class="w-10 h-10 border-2 border-black flex items-center justify-center text-xs font-sans
+       transition hover:bg-black hover:text-white
+       {{ app()->getLocale() === 'fr' ? 'bg-black text-white' : '' }}">
+                FR
+            </a>
+
+            <a href="{{ url('/en') }}"
+               class="w-10 h-10 border-2 border-black flex items-center justify-center text-xs font-sans
+       transition hover:bg-black hover:text-white
+       {{ app()->getLocale() === 'en' ? 'bg-black text-white' : '' }}">
+                EN
+            </a>
+
             <a href="#"
                id="openCookieModalLink"
                class="w-10 h-10 border-2 border-black flex items-center justify-center hover:bg-black hover:text-white">

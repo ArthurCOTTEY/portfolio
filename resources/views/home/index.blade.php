@@ -266,7 +266,7 @@
             <!-- RIGHT -->
             <div class="md:col-span-8 p-8 md:p-12 bg-white">
 
-                <form id="contactForm" method="POST" action="/contact" class="space-y-6">
+                <form method="POST" class="space-y-6" id="contactForm" action="{{ route('contact.store', app()->getLocale()) }}">
                     @csrf
 
                     <!-- NAME -->

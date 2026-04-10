@@ -13,19 +13,21 @@ class SetLocale
      *
      * @param  Closure(Request): (Response)  $next
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle($request, Closure $next)
     {
-        if (session('locale')) {
-            app()->setLocale(session('locale'));
-            return $next($request);
+        $locale = $request->segment(1);
+
+        if (!in_array($locale, ['fr', 'en'])) {
+            $locale = session('locale')
+                ?? $request->getPreferredLanguage(['fr', 'en'])
+                ?? 'en';
+
+            return redirect("/$locale");
         }
-        $locale = substr($request->server('HTTP_ACCEPT_LANGUAGE'), 0, 2);
-        if ($locale === 'fr') {
-            app()->setLocale('fr');
-        } else {
-            app()->setLocale('en');
-        }
-        app()->setLocale('en');
+
+        app()->setLocale($locale);
+        session(['locale' => $locale]);
+
         return $next($request);
     }
 }
