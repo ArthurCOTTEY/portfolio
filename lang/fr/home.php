@@ -84,7 +84,7 @@ return [
     'cookie_modal' => [
         'title' => 'Gérer les cookies',
         'description' => "Nous utilisons des cookies pour améliorer votre expérience et mesurer l’audience. Vous pouvez accepter, refuser ou personnaliser votre choix à tout moment.",
-        'learn_more' => "En savoir plus",
+        'learn_more' => "En savoir plus sur la politique de confidentialité",
 
         'necessary_title' => "Cookies nécessaires",
         'necessary_desc' => "Indispensables au fonctionnement du site. Ils ne peuvent pas être désactivés.",

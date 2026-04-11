@@ -94,7 +94,7 @@ return [
     'cookie_modal' => [
         'title' => 'Manage cookies',
         'description' => "We use cookies to improve your experience and measure audience. You can accept, reject or customize your choices at any time.",
-        'learn_more' => "Learn more",
+        'learn_more' => "Learn more about the privacy policy",
 
         'necessary_title' => "Necessary cookies",
         'necessary_desc' => "Required for the website to function. They cannot be disabled.",
