@@ -28,7 +28,7 @@
     </span>
                 </nav>
 
-                <h1 class="font-display text-5xl md:text-7xl font-black tracking-tight leading-none">
+                <h1 class="font-display text-4xl md:text-7xl font-black tracking-tight leading-none">
                     {{ __('privacy.hero.title') }}
                 </h1>
 
