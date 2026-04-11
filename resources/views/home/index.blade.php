@@ -26,11 +26,13 @@
                     Je conçois et développe des applications web performantes, du site vitrine au CRM en passant par des plateformes e-commerce, avec une attention particulière portée à la qualité du code, à la structure des projets et à l’expérience utilisateur.
                 </p>
             </div>
-            <div class="h-full">
+            <div class="h-[260px] md:h-full">
                 <img
                     src="{{ asset('storage/image_hero.webp') }}"
-                    alt=""
+                    alt="Main image"
                     class="w-full h-full object-cover"
+                    width="638"
+                    height="456"
                 >
             </div>
         </div>
@@ -39,11 +41,13 @@
         <div class="grid md:grid-cols-12">
             <div class="order-2 md:order-1 md:col-span-3
             border-t-2 md:border-t-0 md:border-r-2 border-black
-            bg-white">
+            bg-white h-[260px] md:h-full">
                 <img
                     src="{{ asset('storage/image_about.webp') }}"
-                    alt=""
+                    alt="Liverpool image"
                     class="w-full h-full object-cover"
+                    width="317"
+                    height="624"
                 >
             </div>
             <div class="order-1 md:order-2 md:col-span-9 p-10 md:p-16 bg-white">
@@ -122,14 +126,8 @@
                         </p>
                         <div class="mt-6 flex flex-wrap gap-3">
                             @foreach($language->skills as $skill)
-                                <div class="group relative bg-white h-13 w-13 flex items-center justify-center">
-                                    <img
-                                        src="{{ asset('storage/' . $skill->image) }}"
-                                        width="30"
-                                        height="30"
-                                        loading="lazy"
-                                        alt="{{ $skill->name }}"
-                                    >
+                                <div class="group relative bg-white h-13 w-13 flex items-center justify-center [&>svg]:max-w-[30px] [&>svg]:max-h-[30px]">
+                                    {!! file_get_contents(storage_path('app/public/' . $skill->image)) !!}
                                     <span class="absolute -top-6 left-1/2 -translate-x-1/2 bg-black text-white text-[10px] px-2 py-0.5 opacity-0 group-hover:opacity-100 transition whitespace-nowrap">
                                         {{ $skill->name }}
                                     </span>
@@ -228,7 +226,7 @@
                     </div>
 
                     <div>
-                        <label class="block text-sm font-sans mb-1" for="name">
+                        <label class="block text-sm font-sans mb-1" for="email">
                             Email <span class="text-red-500">*</span>
                         </label>
                         <input type="email" required name="email" id="email"

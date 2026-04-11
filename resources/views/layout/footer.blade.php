@@ -34,6 +34,7 @@
 
             </a>
             <a href="#"
+               aria-label="cookie"
                id="openCookieModalLink"
                class="w-10 h-10 border-2 border-black flex items-center justify-center hover:bg-black hover:text-white">
 
