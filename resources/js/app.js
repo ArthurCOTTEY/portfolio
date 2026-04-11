@@ -24,78 +24,88 @@ btn.addEventListener('click', () => {
     spans[2].classList.toggle('-translate-y-1.5');
 });
 
-document.getElementById('contactForm').addEventListener('submit', function (e) {
-    e.preventDefault();
+const contactForm = document.getElementById('contactForm');
 
-    let form = this;
-    let formData = new FormData(form);
+if (contactForm) {
+    contactForm.addEventListener('submit', function (e) {
+        e.preventDefault();
 
-    // 🔄 Reset erreurs
-    document.querySelectorAll('[id^="error-"]').forEach(el => {
-        el.classList.add('hidden');
-        el.textContent = '';
-    });
+        let form = this;
+        let formData = new FormData(form);
 
-    document.querySelectorAll('input, textarea').forEach(el => {
-        el.classList.remove('border-red-500');
-    });
-
-    fetch(form.action, {
-        method: form.method,
-        headers: {
-            'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value,
-            'Accept': 'application/json'
-        },
-        body: formData
-    })
-        .then(async response => {
-            let data = await response.json();
-
-            if (!response.ok) {
-                throw data;
-            }
-
-            return data;
-        })
-        .then(data => {
-            showToast(data.message || window.i18n.contact_section.success || "Message envoyé !");
-            form.reset();
-        })
-        .catch(error => {
-            if (error.errors) {
-                Object.keys(error.errors).forEach(field => {
-                    let input = document.getElementById(field);
-                    let errorEl = document.getElementById('error-' + field);
-
-                    if (input) {
-                        // 🔴 Bordure rouge + animation
-                        input.classList.add('border-red-500', 'shake');
-
-                        setTimeout(() => {
-                            input.classList.remove('shake');
-                        }, 300);
-                    }
-
-                    if (errorEl) {
-                        // 💬 Message erreur (backend si dispo sinon fallback i18n)
-                        errorEl.textContent =
-                            error.errors[field][0] ||
-                            window.i18n.contact_section.errors?.[field] ||
-                            "Erreur";
-
-                        errorEl.classList.remove('hidden');
-                        errorEl.classList.add('opacity-0');
-
-                        setTimeout(() => {
-                            errorEl.classList.remove('opacity-0');
-                        }, 10);
-                    }
-                });
-            } else {
-                showToast(window.i18n.contact_section.error || "Une erreur est survenue", 'error');
-            }
+        // 🔄 Reset erreurs
+        document.querySelectorAll('[id^="error-"]').forEach(el => {
+            el.classList.add('hidden');
+            el.textContent = '';
         });
-});
+
+        document.querySelectorAll('input, textarea').forEach(el => {
+            el.classList.remove('border-red-500');
+        });
+
+        fetch(form.action, {
+            method: form.method,
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('input[name="_token"]')?.value,
+                'Accept': 'application/json'
+            },
+            body: formData
+        })
+            .then(async response => {
+                let data = await response.json();
+
+                if (!response.ok) {
+                    throw data;
+                }
+
+                return data;
+            })
+            .then(data => {
+                showToast(
+                    data.message ||
+                    window.i18n?.contact_section?.success ||
+                    "Message envoyé !"
+                );
+                form.reset();
+            })
+            .catch(error => {
+                if (error.errors) {
+                    Object.keys(error.errors).forEach(field => {
+                        let input = document.getElementById(field);
+                        let errorEl = document.getElementById('error-' + field);
+
+                        if (input) {
+                            input.classList.add('border-red-500', 'shake');
+
+                            setTimeout(() => {
+                                input.classList.remove('shake');
+                            }, 300);
+                        }
+
+                        if (errorEl) {
+                            errorEl.textContent =
+                                error.errors[field][0] ||
+                                window.i18n?.contact_section?.errors?.[field] ||
+                                "Erreur";
+
+                            errorEl.classList.remove('hidden');
+                            errorEl.classList.add('opacity-0');
+
+                            setTimeout(() => {
+                                errorEl.classList.remove('opacity-0');
+                            }, 10);
+                        }
+                    });
+                } else {
+                    showToast(
+                        window.i18n?.contact_section?.error ||
+                        "Une erreur est survenue",
+                        'error'
+                    );
+                }
+            });
+    });
+}
 
 function showToast(message, type = 'success') {
     const toast = document.getElementById('toast');

@@ -79,9 +79,10 @@
             <p class="font-sans text-sm leading-relaxed">
                 {{ __('home.cookie_modal.description') }}
 
-                <a href="/politique-de-confidentialite" class="underline font-medium">
+                <a href="{{ url('/' . app()->getLocale() . '/' . __('common.privacy_slug')) }}"
+                   class="underline font-medium">
                     {{ __('home.cookie_modal.learn_more') }}
-                </a>.
+                </a>
             </p>
 
             <!-- NECESSARY -->

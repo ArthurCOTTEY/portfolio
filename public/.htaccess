@@ -5,10 +5,11 @@
 
     RewriteEngine On
 
-    # 🔒 Force HTTPS + WWW
+
+    # Redirection unique vers HTTPS + WWW + FR par défaut
     RewriteCond %{HTTPS} !=on [OR]
     RewriteCond %{HTTP_HOST} !^www\.arthurcottey\.fr$ [NC]
-    RewriteRule ^ https://www.arthurcottey.fr%{REQUEST_URI} [L,R=301]
+    RewriteRule ^(.*)$ https://www.arthurcottey.fr/fr/$1 [L,R=301]
 
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .

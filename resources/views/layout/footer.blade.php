@@ -2,7 +2,11 @@
 
     <div class="flex flex-col md:flex-row items-center justify-between gap-6 p-6 md:p-8">
         <div class="text-sm font-sans text-gray-600 text-center md:text-left">
-            © {{ date('Y') }} Arthur Cottey — {{ __('home.footer.copyright') }}
+            © {{ date('Y') }} Arthur Cottey — {{ __('home.footer.copyright') }} —
+            <a href="{{ url('/' . app()->getLocale() . '/' . __('common.privacy_slug')) }}"
+               class="hover:underline">
+                {{ __('privacy.hero.title') }}
+            </a>
         </div>
 
         <!-- RIGHT -->

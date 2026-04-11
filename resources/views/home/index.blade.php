@@ -8,6 +8,9 @@
 @section('og_image', asset(__('home.seo.og_image')))
 
 @section('body')
+    <script>
+        window.i18n = @json(__('form'));
+    </script>
     <section class="border-b-2 border-black">
         <div class="grid md:grid-cols-2">
             <div class="p-10 flex flex-col justify-center
@@ -325,7 +328,7 @@
     <section class="border-b-2 border-black overflow-hidden bg-black text-white">
         <div class="marquee">
             <div class="marquee-content marqueeEnd flex items-center gap-12 py-4">
-                @for($i = 0; $i < 15; $i++)
+                @for($i = 0; $i < 6; $i++)
                     <span class="font-display text-xl font-bold whitespace-nowrap">
                         Imagine • Build • Create • Learn
                     </span>
@@ -340,6 +343,3 @@
         </div>
     </div>
 @endsection
-<script>
-    window.i18n = @json(__('form'));
-</script>

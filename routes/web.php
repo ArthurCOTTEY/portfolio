@@ -24,3 +24,18 @@ Route::group(['prefix' => '{locale}'], function () {
 
     Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 });
+
+Route::prefix('fr')->group(function () {
+    Route::get('/politique-de-confidentialite', function () {
+        app()->setLocale('fr');
+        return view('legal.privacy');
+    })->name('privacy.fr');
+});
+
+Route::prefix('en')->group(function () {
+    Route::get('/privacy-policy', function () {
+        app()->setLocale('en');
+        return view('legal.privacy');
+    })->name('privacy.en');
+});
+

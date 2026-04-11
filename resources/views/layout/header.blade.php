@@ -1,7 +1,9 @@
 <header class="scroll-mt-24 sticky top-0 z-50 bg-white border-b-2 border-black">
     <div class="flex items-center justify-between p-4">
         <div class="font-display font-bold text-lg tracking-tight">
-            ARTHUR COTTEY
+            <a href="{{ url('/' . app()->getLocale()) }}">
+                ARTHUR COTTEY
+            </a>
         </div>
 
         <nav class="hidden md:flex items-center gap-8 font-sans text-sm">
