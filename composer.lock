@@ -4,8 +4,93 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "627d2df09ad057c5d5d7d8dfeadc3285",
+    "content-hash": "5aa5c08ca5bd08282aee27cdd7c93341",
     "packages": [
+        {
+            "name": "astrotomic/laravel-translatable",
+            "version": "v11.17.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Astrotomic/laravel-translatable.git",
+                "reference": "e29bb7d66017033337e0271a103a940d2d745681"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Astrotomic/laravel-translatable/zipball/e29bb7d66017033337e0271a103a940d2d745681",
+                "reference": "e29bb7d66017033337e0271a103a940d2d745681",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^9.0 || ^10.0 || ^11.0 || ^12.0 || ^13.0",
+                "illuminate/database": "^9.0 || ^10.0 || ^11.0 || ^12.0 || ^13.0",
+                "illuminate/support": "^9.0 || ^10.0 || ^11.0 || ^12.0 || ^13.0",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "larastan/larastan": "^2.0 || ^3.0",
+                "laravel/legacy-factories": "^1.0.4",
+                "laravel/pint": "^1.0",
+                "mockery/mockery": "^1.3.3",
+                "orchestra/testbench": "^7.0 || ^8.0 || ^9.0 || ^10.0 || ^11.0",
+                "phpunit/phpunit": "^10.0 || ^11.0 || ^12.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Astrotomic\\Translatable\\TranslatableServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Astrotomic\\Translatable\\": "src/Translatable/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tom Witkowski",
+                    "email": "gummibeer@astrotomic.info",
+                    "homepage": "https://gummibeer.de",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Dimitrios Savvopoulos",
+                    "email": "ds@dimsav.com",
+                    "homepage": "http://dimsav.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A Laravel package for multilingual models",
+            "homepage": "https://astrotomic.info",
+            "keywords": [
+                "database",
+                "language",
+                "laravel",
+                "translation"
+            ],
+            "support": {
+                "docs": "https://docs.astrotomic.info/laravel-translatable",
+                "email": "dev@astrotomic.info",
+                "issues": "https://github.com/Astrotomic/laravel-translatable/issues",
+                "source": "https://github.com/Astrotomic/laravel-translatable"
+            },
+            "funding": [
+                {
+                    "url": "https://forest.astrotomic.info",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/Gummibeer",
+                    "type": "github"
+                }
+            ],
+            "time": "2026-03-27T14:41:10+00:00"
+        },
         {
             "name": "blade-ui-kit/blade-heroicons",
             "version": "2.7.0",
@@ -793,6 +878,79 @@
                 }
             ],
             "time": "2024-02-05T11:56:58+00:00"
+        },
+        {
+            "name": "doriiaan/filament-astrotomic",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Doriiaan/filament-astrotomic.git",
+                "reference": "4db4ffdcdb4ee2809122742a3f9e0cf0cb4a0b81"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Doriiaan/filament-astrotomic/zipball/4db4ffdcdb4ee2809122742a3f9e0cf0cb4a0b81",
+                "reference": "4db4ffdcdb4ee2809122742a3f9e0cf0cb4a0b81",
+                "shasum": ""
+            },
+            "require": {
+                "astrotomic/laravel-translatable": "^11.16",
+                "filament/filament": "^4.0 || ^5.0",
+                "filament/forms": "^4.0 || ^5.0",
+                "filament/tables": "^4.0 || ^5.0",
+                "php": "^8.2",
+                "spatie/laravel-package-tools": "^1.15.0"
+            },
+            "require-dev": {
+                "laravel/pint": "^1.0",
+                "nunomaduro/collision": "^8.0",
+                "orchestra/testbench": "^9.0|^10.0",
+                "pestphp/pest": "^3.0|^4.0",
+                "pestphp/pest-plugin-arch": "^3.0|^4.0",
+                "pestphp/pest-plugin-laravel": "^3.0|^4.0",
+                "pestphp/pest-plugin-livewire": "^3.0|^4.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "FilamentAstrotomic": "Doriiaan\\FilamentAstrotomic\\Facades\\FilamentAstrotomic"
+                    },
+                    "providers": [
+                        "Doriiaan\\FilamentAstrotomic\\FilamentAstrotomicServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Doriiaan\\FilamentAstrotomic\\": "src/",
+                    "Doriiaan\\FilamentAstrotomic\\Database\\Factories\\": "database/factories/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Doriiaan",
+                    "email": "alary.dorian81@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Filament plugin which allows translations to be added to Filament resources.",
+            "homepage": "https://github.com/Doriiaan/filament-astrotomic/",
+            "keywords": [
+                "doriiaan",
+                "filament-astrotomic",
+                "filamentphp",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/Doriiaan/filament-astrotomic/issues",
+                "source": "https://github.com/Doriiaan/filament-astrotomic"
+            },
+            "time": "2026-03-15T08:47:43+00:00"
         },
         {
             "name": "dragonmantank/cron-expression",
@@ -5145,6 +5303,89 @@
                 }
             ],
             "time": "2026-02-21T12:49:54+00:00"
+        },
+        {
+            "name": "spatie/laravel-translatable",
+            "version": "6.13.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-translatable.git",
+                "reference": "f2c5b8805a2dd22799c9aa8ce66cd98ce3170dcb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-translatable/zipball/f2c5b8805a2dd22799c9aa8ce66cd98ce3170dcb",
+                "reference": "f2c5b8805a2dd22799c9aa8ce66cd98ce3170dcb",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "^11.0|^12.0|^13.0",
+                "illuminate/support": "^11.0|^12.0|^13.0",
+                "php": "^8.3",
+                "spatie/laravel-package-tools": "^1.93.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^3.90",
+                "mockery/mockery": "^1.6.12",
+                "orchestra/testbench": "^9.0|^10.0|^11.0",
+                "pestphp/pest": "^4.0.0"
+            },
+            "type": "library",
+            "extra": {
+                "aliases": {
+                    "Translatable": "Spatie\\Translatable\\Facades\\Translatable"
+                },
+                "laravel": {
+                    "providers": [
+                        "Spatie\\Translatable\\TranslatableServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\Translatable\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Sebastian De Deyne",
+                    "email": "sebastian@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A trait to make an Eloquent model hold translations",
+            "homepage": "https://github.com/spatie/laravel-translatable",
+            "keywords": [
+                "eloquent",
+                "i8n",
+                "laravel-translatable",
+                "model",
+                "multilingual",
+                "spatie",
+                "translate"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/laravel-translatable/issues",
+                "source": "https://github.com/spatie/laravel-translatable/tree/6.13.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/spatie",
+                    "type": "github"
+                }
+            ],
+            "time": "2026-02-21T14:20:19+00:00"
         },
         {
             "name": "spatie/shiki-php",

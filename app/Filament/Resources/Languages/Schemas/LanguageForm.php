@@ -4,9 +4,12 @@ namespace App\Filament\Resources\Languages\Schemas;
 
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Repeater;
-use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Textarea;
 use Filament\Schemas\Schema;
+
+use Doriiaan\FilamentAstrotomic\Schemas\Components\TranslatableTabs;
+use Doriiaan\FilamentAstrotomic\TranslatableTab;
 
 class LanguageForm
 {
@@ -14,17 +17,24 @@ class LanguageForm
     {
         return $schema
             ->components([
-                TextInput::make('name')
-                    ->required()
-                    ->maxLength(255),
 
-                Textarea::make('description')
-                    ->rows(4)
-                    ->maxLength(500)
-                    ->columnSpanFull(),
+                // 🌍 MULTILINGUE (FR / EN tabs)
+                TranslatableTabs::make()
+                    ->localeTabSchema(fn (TranslatableTab $tab) => [
 
+                        TextInput::make($tab->makeName('name'))
+                            ->required()
+                            ->maxLength(255),
+
+                        Textarea::make($tab->makeName('description'))
+                            ->rows(4)
+                            ->maxLength(500)
+                            ->columnSpanFull(),
+                    ]),
+
+                // 🧠 RELATION NON TRADUITE (skills)
                 Repeater::make('skills')
-                    ->relationship() // 🔥 important !
+                    ->relationship()
                     ->schema([
                         TextInput::make('name')
                             ->required()
@@ -32,10 +42,10 @@ class LanguageForm
 
                         FileUpload::make('image')
                             ->label('Icône SVG')
-                            ->image() // permet preview
+                            ->image()
                             ->disk('public')
-                            ->directory('skills-icons') // stockage
-                            ->visibility('public') // important pour affichage
+                            ->directory('skills-icons')
+                            ->visibility('public')
                             ->preserveFilenames(),
                     ])
                     ->columns(1)

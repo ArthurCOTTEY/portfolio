@@ -15,14 +15,14 @@ class ContactController extends Controller
             'email' => 'required|email',
             'message' => 'required|min:5',
         ], [
-            'name.required' => 'Le nom est obligatoire.',
-            'name.min' => 'Le nom doit contenir au moins 2 caractères.',
+            'name.required' => __('form.validation.name_required'),
+            'name.min' => __('form.validation.name_min'),
 
-            'email.required' => 'L’email est obligatoire.',
-            'email.email' => 'Veuillez entrer une adresse email valide.',
+            'email.required' => __('form.validation.email_required'),
+            'email.email' => __('form.validation.email_email'),
 
-            'message.required' => 'Le message est obligatoire.',
-            'message.min' => 'Le message doit contenir au moins 5 caractères.',
+            'message.required' => __('form.validation.message_required'),
+            'message.min' => __('form.validation.message_min'),
         ]);
 
         Mail::raw(
@@ -36,7 +36,7 @@ class ContactController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'Message envoyé avec succès !'
+            'message' => __('form.contact_section.success')
         ]);
     }
 }
