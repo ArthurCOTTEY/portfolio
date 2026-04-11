@@ -7,6 +7,9 @@
 @section('og_description', __('privacy.seo.og_description'))
 @section('og_image', asset(__('privacy.seo.og_image')))
 
+@section('hreflang_fr', url('/fr/politique-de-confidentialite'))
+@section('hreflang_en', url('/en/privacy-policy'))
+
 @section('body')
 
     <section class="border-b-2 border-black">

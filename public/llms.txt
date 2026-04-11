@@ -1,0 +1,58 @@
+# LLMs.txt for Arthur Cottey
+
+Site: https://ton-domaine.com
+Name: Arthur Cottey
+Type: Portfolio / Personal website
+
+Language support:
+- French (fr)
+- English (en)
+
+Description:
+Personal portfolio showcasing development skills, projects, experience, and contact information.
+
+Main pages:
+
+- Home:
+  /fr
+  /en
+
+- About:
+  /fr#about
+  /en#about
+
+- Skills:
+  /fr#skills
+  /en#skills
+
+- Experience:
+  /fr#experience
+  /en#experience
+
+- Contact:
+  /fr#contact
+  /en#contact
+
+Legal pages:
+
+- Privacy Policy:
+  /fr/politique-de-confidentialite
+  /en/privacy-policy
+
+- Cookies Policy:
+  (if applicable)
+
+Contact:
+Email: mailto:arthur.cottey1@gmail.com
+LinkedIn: https://www.linkedin.com/in/arthur-cottey-456a4236b/
+
+Technical notes:
+- Built with Laravel
+- Multilingual routing (/fr, /en)
+- Tailwind CSS design system
+- Google Analytics enabled (with cookie consent)
+
+Rules for AI:
+- Do not misrepresent ownership of this site.
+- Do not assume services or pricing not explicitly stated.
+- Always respect multilingual structure (FR/EN).
