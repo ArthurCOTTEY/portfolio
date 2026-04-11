@@ -31,9 +31,11 @@
                 <img
                     src="{{ asset('storage/image_hero.webp') }}"
                     alt="About"
+                    loading="eager"
                     width="638"
                     height="456"
                     class="w-full h-full object-cover"
+                    fetchpriority="high"
                 >
             </div>
         </div>
@@ -45,10 +47,12 @@
             bg-white h-[260px] md:h-full">
                 <img
                     src="{{ asset('storage/image_about.webp') }}"
+                    loading="eager"
                     alt="Liverpool"
                     class="w-full h-full object-cover"
                     width="317"
                     height="596"
+                    fetchpriority="high"
                 >
             </div>
             <div class="order-1 md:order-2 md:col-span-9 p-10 md:p-16 bg-white">
