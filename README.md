@@ -26,7 +26,8 @@ Panneau d’administration : `/admin` (gestion des catégories de compétences e
 | Services, parcours, FAQ (page + JSON-LD + llms.txt) | `config/content.php` |
 | Pages | `resources/views/pages` |
 | Bandeau et préférences cookies | `resources/views/partials/cookie-consent.blade.php`, `resources/js/modules/cookie-consent.js` |
-| Compétences (admin) | `app/Filament/Resources/SkillCategories` |
+| Compétences et projets (admin) | `app/Filament/Resources` |
+| Visuels des projets | `public/media/projects` (disque `media`, servi sans lien symbolique) |
 | Sitemap et llms.txt (générés) | `app/Http/Controllers/SeoController.php` |
 
 ## Cookies et RGPD

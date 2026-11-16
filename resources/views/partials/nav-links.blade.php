@@ -2,6 +2,7 @@
     $links = [
         'a-propos' => 'À propos',
         'services' => 'Services',
+        'projets' => 'Projets',
         'competences' => 'Compétences',
         'parcours' => 'Parcours',
     ];

@@ -69,6 +69,10 @@ return [
             'answer' => 'Sites vitrines, plateformes e-commerce, CRM et outils métier, API et back-offices. J’interviens aussi bien sur des projets neufs que sur la reprise, la maintenance et l’évolution d’applications existantes.',
         ],
         [
+            'question' => 'Quels projets avez-vous réalisés ?',
+            'answer' => 'Mon projet principal est Cekale (cekale.fr), un logiciel de prise de rendez-vous en ligne pour les professionnels — salons, instituts, cabinets et indépendants — que j’ai conçu et développé de bout en bout avec Laravel, React et Inertia.js. Il est présenté en détail dans la section « Projets » de cette page.',
+        ],
+        [
             'question' => 'Comment vous contacter ?',
             'answer' => 'Le plus simple est d’utiliser le formulaire de contact en bas de cette page, d’écrire à arthur.cottey1@gmail.com ou de m’envoyer un message sur LinkedIn. Je réponds généralement rapidement.',
         ],

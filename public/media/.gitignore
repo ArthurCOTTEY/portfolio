@@ -1,0 +1,3 @@
+# Fichiers envoyés depuis l’admin : non versionnés, sauf les visuels livrés avec le site.
+projects/*
+!projects/cekale.webp

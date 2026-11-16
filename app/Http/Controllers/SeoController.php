@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Project;
 use App\Models\Skill;
 use App\Models\SkillCategory;
 use Illuminate\Http\Response;
@@ -18,6 +19,7 @@ class SeoController extends Controller
         $contentUpdatedAt = collect([
             SkillCategory::max('updated_at'),
             Skill::max('updated_at'),
+            Project::max('updated_at'),
             filemtime(resource_path('views/pages/home.blade.php')),
             filemtime(config_path('content.php')),
         ])->filter()->map(fn ($date) => Carbon::parse(is_int($date) ? "@{$date}" : $date))->max();
@@ -38,7 +40,10 @@ class SeoController extends Controller
     public function llms(): Response
     {
         return response()
-            ->view('seo.llms', ['skillCategories' => SkillCategory::query()->forDisplay()->get()])
+            ->view('seo.llms', [
+                'projects' => Project::query()->forDisplay()->get(),
+                'skillCategories' => SkillCategory::query()->forDisplay()->get(),
+            ])
             ->header('Content-Type', 'text/plain; charset=UTF-8');
     }
 }

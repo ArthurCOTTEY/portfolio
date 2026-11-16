@@ -67,6 +67,21 @@
                 'skills' => $skillNames->implode(', '),
             ],
         ],
+        ...$projects->map(fn ($project) => array_filter([
+            '@type' => 'SoftwareApplication',
+            '@id' => route('home').'#projet-'.$project->slug,
+            'name' => $project->name,
+            'headline' => $project->tagline,
+            'description' => $project->description,
+            'url' => $project->url,
+            'image' => $project->image_url,
+            'applicationCategory' => 'WebApplication',
+            'operatingSystem' => 'Web',
+            'inLanguage' => 'fr-FR',
+            'dateCreated' => $project->year ? (string) $project->year : null,
+            'keywords' => $project->stack ? implode(', ', $project->stack) : null,
+            'creator' => ['@id' => $personId],
+        ]))->all(),
         [
             '@type' => 'FAQPage',
             '@id' => route('home').'#faq',
@@ -188,6 +203,104 @@
             </div>
         </div>
     </section>
+
+    {{-- PROJETS --}}
+    @if ($projects->isNotEmpty())
+        <section id="projets" class="border-b-2 border-black bg-white" aria-labelledby="projects-title">
+            <div class="p-8 md:p-12 lg:p-16">
+                <div class="max-w-3xl">
+                    <h2 id="projects-title" class="section-title border-yellow-400">Projets</h2>
+                    <p class="mt-6 text-base leading-relaxed md:text-lg">
+                        Des produits que j’ai conçus et développés de bout en bout, de l’idée à la mise en production.
+                    </p>
+                </div>
+
+                <div class="mt-12 space-y-12">
+                    @foreach ($projects as $project)
+                        <article id="projet-{{ $project->slug }}" class="border-2 border-black shadow-[8px_8px_0_0_#000]" aria-labelledby="projet-{{ $project->slug }}-title">
+                            <div class="grid lg:grid-cols-12">
+                                @if ($project->image_url)
+                                    <div class="flex flex-col border-b-2 border-black bg-gray-100 lg:col-span-7 lg:border-b-0 {{ $loop->even ? 'lg:order-2 lg:border-l-2' : 'lg:border-r-2' }}">
+                                        <div aria-hidden="true" class="flex items-center gap-2 border-b-2 border-black bg-white px-4 py-2">
+                                            <span class="h-3 w-3 border-2 border-black bg-red-500"></span>
+                                            <span class="h-3 w-3 border-2 border-black bg-yellow-400"></span>
+                                            <span class="h-3 w-3 border-2 border-black bg-green-500"></span>
+                                            @if ($project->url)
+                                                <span class="ml-3 truncate text-xs text-gray-700">{{ preg_replace('#^https?://#', '', $project->url) }}</span>
+                                            @endif
+                                        </div>
+                                        <img src="{{ $project->image_url }}" alt="Aperçu de la page d’accueil de {{ $project->name }}"
+                                             width="1440" height="900" loading="lazy" decoding="async"
+                                             class="aspect-[16/10] w-full flex-1 object-cover object-top lg:aspect-auto">
+                                    </div>
+                                @endif
+
+                                <div class="flex flex-col p-6 md:p-10 {{ $project->image_url ? 'lg:col-span-5' : 'lg:col-span-12' }}">
+                                    <div class="flex flex-wrap items-center gap-3 text-xs font-semibold">
+                                        <span class="inline-flex items-center gap-2 border-2 border-black px-2 py-1">
+                                            <span aria-hidden="true" class="h-2.5 w-2.5 {{ $project->status->badgeClass() }} ring-2 ring-black"></span>
+                                            {{ $project->status->getLabel() }}
+                                        </span>
+                                        @if ($project->year)
+                                            <span class="border-2 border-black px-2 py-1">{{ $project->year }}</span>
+                                        @endif
+                                    </div>
+
+                                    <h3 id="projet-{{ $project->slug }}-title" class="mt-5 font-display text-4xl font-bold tracking-tight md:text-5xl">{{ $project->name }}</h3>
+                                    <p class="mt-2 font-display text-lg font-semibold">{{ $project->tagline }}</p>
+                                    <p class="mt-4 text-sm leading-relaxed text-gray-800 md:text-base">{{ $project->description }}</p>
+
+                                    @if ($project->role)
+                                        <p class="mt-4 border-l-4 border-yellow-400 pl-3 text-sm font-medium">{{ $project->role }}</p>
+                                    @endif
+
+                                    @if ($project->url || $project->repository_url)
+                                        <div class="mt-8 flex flex-wrap gap-3 lg:mt-auto lg:pt-8">
+                                            @if ($project->url)
+                                                <a href="{{ $project->url }}" target="_blank" rel="noopener" class="btn btn-yellow">
+                                                    Voir {{ $project->name }} <span aria-hidden="true">↗</span><span class="sr-only">(nouvel onglet)</span>
+                                                </a>
+                                            @endif
+                                            @if ($project->repository_url)
+                                                <a href="{{ $project->repository_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-white">
+                                                    Code source <span aria-hidden="true">↗</span><span class="sr-only">(nouvel onglet)</span>
+                                                </a>
+                                            @endif
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+
+                            @if ($project->highlights || $project->stack)
+                                <div class="grid gap-8 border-t-2 border-black bg-gray-100 p-6 md:p-10 lg:grid-cols-12">
+                                    @if ($project->highlights)
+                                        <div class="lg:col-span-8">
+                                            <h4 class="eyebrow">Points forts</h4>
+                                            <ul class="mt-4 grid gap-x-8 gap-y-3 text-sm md:grid-cols-2">
+                                                @foreach ($project->highlights as $highlight)
+                                                    <li class="flex gap-2"><span aria-hidden="true" class="mt-1.5 h-2 w-2 shrink-0 bg-yellow-400 ring-2 ring-black"></span>{{ $highlight }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
+                                    @if ($project->stack)
+                                        <div class="lg:col-span-4">
+                                            <h4 class="eyebrow">Technologies</h4>
+                                            <ul class="mt-4 flex flex-wrap gap-2" aria-label="Technologies utilisées pour {{ $project->name }}">
+                                                @foreach ($project->stack as $tech)
+                                                    <li class="border border-black bg-white px-2 py-0.5 text-xs font-medium">{{ $tech }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
+                                </div>
+                            @endif
+                        </article>
+                    @endforeach
+                </div>
+            </div>
+        </section>
+    @endif
 
     {{-- COMPÉTENCES --}}
     <section id="competences" class="border-b-2 border-black bg-white" aria-labelledby="skills-title">

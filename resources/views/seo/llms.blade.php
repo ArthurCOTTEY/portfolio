@@ -19,6 +19,29 @@ Site officiel et portfolio d’Arthur Cottey ({!! route('home') !!}). Contenu r�
 - **{!! $service['title'] !!}** : {!! $service['text'] !!}
 @endforeach
 
+## Projets
+
+@foreach ($projects as $project)
+### {!! $project->name !!} — {!! $project->tagline !!}
+
+{!! $project->description !!}
+
+@if ($project->role)
+- Rôle : {!! $project->role !!}
+@endif
+- Statut : {!! $project->status->getLabel() !!}@if ($project->year) ({!! $project->year !!})@endif
+
+@if ($project->url)
+- Site : {!! $project->url !!}
+@endif
+@if ($project->stack)
+- Technologies : {!! implode(', ', $project->stack) !!}
+@endif
+@foreach ($project->highlights ?? [] as $highlight)
+- {!! $highlight !!}
+@endforeach
+
+@endforeach
 ## Compétences
 
 @forelse ($skillCategories as $category)
@@ -49,6 +72,6 @@ Site officiel et portfolio d’Arthur Cottey ({!! route('home') !!}). Contenu r�
 
 ## Pages
 
-- [Accueil]({!! route('home') !!}) : présentation, services, compétences, parcours, FAQ et contact
+- [Accueil]({!! route('home') !!}) : présentation, services, projets, compétences, parcours, FAQ et contact
 - [Mentions légales]({!! route('legal-notice') !!})
 - [Politique de confidentialité]({!! route('privacy') !!})
