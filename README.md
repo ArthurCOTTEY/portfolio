@@ -25,17 +25,18 @@ Panneau d’administration : `/admin` (gestion des catégories de compétences e
 | Identité, contact, analytics, hébergeur | `config/site.php` (+ variables `.env`) |
 | Services, parcours, FAQ (page + JSON-LD + llms.txt) | `config/content.php` |
 | Pages | `resources/views/pages` |
-| Bandeau et préférences cookies | `resources/views/partials/cookie-consent.blade.php`, `resources/js/modules/cookie-consent.js` |
+| Mesure d’audience (Matomo) | `app/Support/Analytics.php`, `resources/js/modules/analytics.js` |
 | Compétences et projets (admin) | `app/Filament/Resources` |
 | Visuels des projets | `public/media/projects` (disque `media`, servi sans lien symbolique) |
 | Sitemap et llms.txt (générés) | `app/Http/Controllers/SeoController.php` |
 
-## Cookies et RGPD
+## Mesure d’audience et RGPD
 
-- Google Analytics n’est chargé **qu’après consentement** ; refuser est aussi simple qu’accepter.
-- Le choix est conservé 6 mois (`site.consent.lifetime_days`), les cookies GA 13 mois maximum.
-- Pour redemander le consentement après un changement, incrémenter `site.consent.version`.
-- Polices auto-hébergées (aucun appel à Google Fonts).
+- Matomo **sans cookie** (`MATOMO_URL`, `MATOMO_SITE_ID`) : exempté de consentement par la CNIL,
+  donc aucun bandeau cookies. Inactif tant que les deux variables ne sont pas renseignées.
+- Réglages Matomo requis pour l’exemption : anonymisation de l’IP (2 octets minimum) et
+  suppression des données brutes après 13 mois.
+- Seuls des cookies strictement nécessaires (session, CSRF) ; polices auto-hébergées.
 
 ## Mise en production
 
@@ -47,6 +48,8 @@ APP_DEBUG=false
 APP_URL=https://www.arthurcottey.fr
 APP_LOCALE=fr
 ADMIN_EMAILS=arthur.cottey1@gmail.com
+MATOMO_URL=https://stats.cekale.fr
+MATOMO_SITE_ID=…      # ID du site créé dans Matomo
 LEGAL_HOST_NAME=…      # obligatoire : mentions légales
 LEGAL_HOST_ADDRESS=…
 LEGAL_HOST_PHONE=…

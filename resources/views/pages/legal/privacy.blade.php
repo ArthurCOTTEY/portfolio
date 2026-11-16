@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Politique de confidentialité et cookies — Arthur Cottey')
-@section('description', 'Données collectées sur arthurcottey.fr, finalités, durées de conservation, cookies utilisés (Google Analytics avec consentement) et exercice de vos droits RGPD.')
+@section('title', 'Politique de confidentialité — Arthur Cottey')
+@section('description', 'Données collectées sur arthurcottey.fr, finalités, durées de conservation, mesure d’audience anonyme sans cookie (Matomo) et exercice de vos droits RGPD.')
 
 @section('content')
     <x-legal-page title="Politique de confidentialité" intro="Ce site collecte le minimum de données possible. Cette page explique lesquelles, pourquoi, combien de temps elles sont conservées et comment exercer vos droits, conformément au RGPD et à la loi Informatique et Libertés.">
@@ -25,23 +25,31 @@
             conservée quelques minutes seulement.
         </p>
 
-        <h2 id="audience">3. Mesure d’audience (Google Analytics)</h2>
+        <h2 id="audience">3. Mesure d’audience (Matomo, sans cookie)</h2>
         <p>
-            <strong>Uniquement si vous l’acceptez</strong>, le site utilise Google Analytics 4 pour produire des
-            statistiques de fréquentation (pages consultées, durée de visite, type d’appareil et de navigateur, pays
-            et ville approximatifs, site de provenance). Aucun script Google n’est chargé tant que vous n’avez pas
-            donné votre accord.
+            Pour savoir quelles pages sont consultées et améliorer le site, j’utilise <strong>Matomo</strong>,
+            un outil de statistiques libre, auto-hébergé sur un serveur situé en France (O2Switch). Aucune donnée
+            n’est transmise à Google ni à un autre tiers, et aucune donnée ne quitte l’Union européenne.
         </p>
         <ul>
-            <li><strong>Base légale :</strong> votre consentement (article 6.1.a du RGPD et article 82 de la loi Informatique et Libertés), que vous pouvez retirer à tout moment.</li>
-            <li><strong>Sous-traitant :</strong> Google Ireland Limited (Gordon House, Barrow Street, Dublin 4, Irlande).</li>
-            <li><strong>Transfert hors UE :</strong> les données peuvent être traitées par Google LLC aux États-Unis. Ce transfert est encadré par la décision d’adéquation de la Commission européenne du 10 juillet 2023 (Data Privacy Framework), Google LLC étant certifiée.</li>
-            <li><strong>Durée de conservation :</strong> cookies 13&nbsp;mois maximum ; données de statistiques 14&nbsp;mois maximum.</li>
-            <li><strong>Pas de publicité :</strong> les signaux publicitaires et le partage de données à des fins marketing ne sont pas utilisés.</li>
+            <li><strong>Sans cookie :</strong> aucun cookie ni traceur n’est déposé sur votre appareil.</li>
+            <li><strong>Anonyme :</strong> adresse IP tronquée, aucun suivi d’un site à l’autre, aucun recoupement avec d’autres données.</li>
+            <li><strong>Données mesurées :</strong> pages vues, site de provenance, type d’appareil et de navigateur, pays approximatif.</li>
+            <li><strong>Base légale :</strong> l’intérêt légitime à mesurer l’audience du site (article 6.1.f du RGPD). Configurée ainsi, cette mesure est exemptée de consentement selon les recommandations de la CNIL.</li>
+            <li><strong>Durée de conservation :</strong> 13&nbsp;mois maximum.</li>
         </ul>
+        @if (\App\Support\Analytics::enabled())
+            <p>Vous pouvez néanmoins refuser d’être comptabilisé :</p>
+            <div id="matomo-opt-out" class="mt-4 border-2 border-black bg-gray-100 p-4 text-sm"></div>
+            <script src="{{ \App\Support\Analytics::trackerUrl() }}index.php?module=CoreAdminHome&amp;action=optOutJS&amp;divId=matomo-opt-out&amp;language=fr&amp;showIntro=0" defer></script>
+        @endif
 
-        <h2 id="cookies">4. Cookies et traceurs</h2>
-        <p>Voici la liste exhaustive des cookies pouvant être déposés par ce site :</p>
+        <h2 id="cookies">4. Cookies</h2>
+        <p>
+            Ce site ne dépose <strong>aucun cookie publicitaire ni de mesure d’audience</strong>. Seuls les cookies
+            strictement nécessaires à son fonctionnement sont utilisés ; ils sont exemptés de consentement,
+            c’est pourquoi aucun bandeau ne vous est présenté.
+        </p>
         <div class="overflow-x-auto">
             <table>
                 <thead>
@@ -49,7 +57,6 @@
                         <th scope="col">Cookie</th>
                         <th scope="col">Finalité</th>
                         <th scope="col">Durée</th>
-                        <th scope="col">Consentement</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -57,40 +64,19 @@
                         <td><code>{{ config('session.cookie') }}</code></td>
                         <td>Session technique nécessaire au fonctionnement du site.</td>
                         <td>{{ config('session.lifetime') / 60 }}&nbsp;h</td>
-                        <td>Non requis</td>
                     </tr>
                     <tr>
                         <td><code>XSRF-TOKEN</code></td>
                         <td>Protection du formulaire de contact contre les attaques CSRF.</td>
                         <td>{{ config('session.lifetime') / 60 }}&nbsp;h</td>
-                        <td>Non requis</td>
-                    </tr>
-                    <tr>
-                        <td><code>{{ config('site.consent.cookie') }}</code></td>
-                        <td>Mémorise votre choix concernant les cookies.</td>
-                        <td>6&nbsp;mois</td>
-                        <td>Non requis</td>
-                    </tr>
-                    <tr>
-                        <td><code>_ga</code>, <code>_ga_*</code></td>
-                        <td>Google Analytics : distinguer les visiteurs et les sessions pour les statistiques.</td>
-                        <td>13&nbsp;mois</td>
-                        <td><strong>Requis</strong></td>
                     </tr>
                 </tbody>
             </table>
         </div>
         <p>
-            Votre choix est conservé 6&nbsp;mois, après quoi il vous est de nouveau demandé. Refuser les cookies de
-            mesure d’audience n’a aucune conséquence sur votre navigation. Les polices de caractères sont hébergées
-            sur ce site : aucune donnée n’est transmise à Google Fonts.
-        </p>
-        <p>
-            <button type="button" data-open-cookie-preferences class="btn btn-yellow">Modifier mes préférences cookies</button>
-        </p>
-        <p>
-            Vous pouvez également bloquer ou supprimer les cookies depuis les réglages de votre navigateur. Pour en
-            savoir plus : <a href="https://www.cnil.fr/fr/cookies-et-autres-traceurs/comment-se-proteger/maitriser-votre-navigateur" target="_blank" rel="noopener noreferrer">maîtriser votre navigateur (CNIL)</a>.
+            Les polices de caractères sont hébergées sur ce site : aucune donnée n’est transmise à Google Fonts.
+            Vous pouvez aussi bloquer ou supprimer les cookies depuis les réglages de votre navigateur
+            (<a href="https://www.cnil.fr/fr/cookies-et-autres-traceurs/comment-se-proteger/maitriser-votre-navigateur" target="_blank" rel="noopener noreferrer">conseils de la CNIL</a>).
         </p>
 
         <h2 id="logs">5. Journaux techniques</h2>
@@ -106,7 +92,6 @@
             <li>droit d’accès, de rectification et d’effacement ;</li>
             <li>droit à la limitation du traitement et droit d’opposition ;</li>
             <li>droit à la portabilité de vos données ;</li>
-            <li>droit de retirer votre consentement à tout moment, sans remettre en cause les traitements déjà effectués ;</li>
             <li>droit de définir des directives relatives au sort de vos données après votre décès.</li>
         </ul>
         <p>
@@ -125,8 +110,8 @@
 
         <h2 id="modifications">8. Modifications</h2>
         <p>
-            Cette politique peut évoluer, notamment en cas de changement des outils utilisés. En cas de modification
-            importante concernant les cookies, votre consentement vous sera de nouveau demandé.
+            Cette politique peut évoluer, notamment en cas de changement des outils utilisés. La date de dernière
+            mise à jour figure en haut de cette page.
         </p>
     </x-legal-page>
 @endsection

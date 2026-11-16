@@ -42,18 +42,10 @@ return [
     )),
 
     'analytics' => [
-        // Google Analytics 4 : chargé uniquement après consentement explicite.
-        'enabled' => (bool) env('ANALYTICS_ENABLED', env('APP_ENV') === 'production'),
-        'ga_id' => env('GOOGLE_ANALYTICS_ID', 'G-BNVSMRP3FP'),
+        // Matomo sans cookie (exempté de consentement) : inactif tant que l'URL et l'ID sont vides.
+        'matomo_url' => env('MATOMO_URL'),
+        'matomo_site_id' => env('MATOMO_SITE_ID'),
         'google_site_verification' => env('GOOGLE_SITE_VERIFICATION', 'T71uwKDUytypzMZWDxUibdPyno_hehEfqqXAdQF064I'),
-    ],
-
-    'consent' => [
-        // Incrémenter pour redemander le consentement après un changement de politique.
-        'version' => 1,
-        // Durée de conservation du choix (recommandation CNIL : 6 mois).
-        'lifetime_days' => 180,
-        'cookie' => 'cookie_consent',
     ],
 
     /*

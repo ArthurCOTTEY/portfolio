@@ -37,9 +37,9 @@
             détenteurs respectifs et ne sont utilisés qu’à des fins d’illustration.
         </p>
 
-        <h2>Données personnelles et cookies</h2>
+        <h2>Données personnelles</h2>
         <p>
-            Le traitement de vos données personnelles et l’utilisation des cookies sont détaillés dans la
+            Le traitement de vos données personnelles est détaillé dans la
             <a href="{{ route('privacy') }}">politique de confidentialité</a>.
         </p>
 

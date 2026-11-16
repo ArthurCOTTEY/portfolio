@@ -11,8 +11,7 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        // Le cookie de consentement est lu côté navigateur : il ne doit pas être chiffré.
-        $middleware->encryptCookies(except: ['cookie_consent']);
+        //
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

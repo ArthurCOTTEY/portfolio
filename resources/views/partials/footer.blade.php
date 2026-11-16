@@ -18,7 +18,6 @@
             <ul class="mt-3 space-y-2 text-sm">
                 <li><a href="{{ route('legal-notice') }}" class="underline-offset-4 hover:underline">Mentions légales</a></li>
                 <li><a href="{{ route('privacy') }}" class="underline-offset-4 hover:underline">Politique de confidentialité</a></li>
-                <li><a href="{{ route('privacy') }}#cookies" data-open-cookie-preferences class="underline-offset-4 hover:underline">Gestion des cookies</a></li>
             </ul>
         </nav>
     </div>

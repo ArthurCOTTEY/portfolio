@@ -48,6 +48,12 @@
         @endif
     @endproduction
 
+    @if (\App\Support\Analytics::enabled())
+        <meta name="matomo-url" content="{{ \App\Support\Analytics::trackerUrl() }}">
+        <meta name="matomo-site-id" content="{{ \App\Support\Analytics::siteId() }}">
+        <link rel="preconnect" href="{{ rtrim(\App\Support\Analytics::trackerUrl(), '/') }}">
+    @endif
+
     @stack('head')
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -75,6 +81,5 @@
      class="fixed bottom-6 left-1/2 z-[70] w-[calc(100%-2rem)] max-w-md -translate-x-1/2 translate-y-4 border-2 border-black px-5 py-4 text-sm font-medium opacity-0 shadow-[4px_4px_0_0_#000] transition duration-300
             data-[type=success]:bg-green-500 data-[type=error]:bg-red-600 data-[type=error]:text-white"></div>
 
-@include('partials.cookie-consent')
 </body>
 </html>
