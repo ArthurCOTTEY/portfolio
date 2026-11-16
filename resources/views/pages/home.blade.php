@@ -254,11 +254,16 @@
                                         <p class="mt-4 border-l-4 border-yellow-400 pl-3 text-sm font-medium">{{ $project->role }}</p>
                                     @endif
 
-                                    @if ($project->url || $project->repository_url)
+                                    @if ($project->hasCaseStudy() || $project->url || $project->repository_url)
                                         <div class="mt-8 flex flex-wrap gap-3 lg:mt-auto lg:pt-8">
+                                            @if ($project->hasCaseStudy())
+                                                <a href="{{ route('projects.show', $project) }}" class="btn btn-black">
+                                                    Lire l’étude de cas <span aria-hidden="true">→</span>
+                                                </a>
+                                            @endif
                                             @if ($project->url)
                                                 <a href="{{ $project->url }}" target="_blank" rel="noopener" class="btn btn-yellow">
-                                                    Voir {{ $project->name }} <span aria-hidden="true">↗</span><span class="sr-only">(nouvel onglet)</span>
+                                                    Visiter le site <span aria-hidden="true">↗</span><span class="sr-only">(nouvel onglet)</span>
                                                 </a>
                                             @endif
                                             @if ($project->repository_url)

@@ -28,6 +28,10 @@ class SeoController extends Controller
 
         $urls = [
             ['loc' => route('home'), 'lastmod' => $contentUpdatedAt, 'priority' => '1.0'],
+            ...Project::query()->forDisplay()->get()
+                ->filter->hasCaseStudy()
+                ->map(fn (Project $project) => ['loc' => route('projects.show', $project), 'lastmod' => $project->updated_at, 'priority' => '0.8'])
+                ->all(),
             ['loc' => route('privacy'), 'lastmod' => $legalUpdatedAt, 'priority' => '0.3'],
             ['loc' => route('legal-notice'), 'lastmod' => $legalUpdatedAt, 'priority' => '0.3'],
         ];

@@ -19,7 +19,7 @@ class EditProject extends EditRecord
                 ->label('Voir sur le site')
                 ->icon(Heroicon::OutlinedArrowTopRightOnSquare)
                 ->color('gray')
-                ->url(fn (): string => route('home').'#projet-'.$this->record->slug, shouldOpenInNewTab: true),
+                ->url(fn (): string => $this->record->hasCaseStudy() ? route('projects.show', $this->record) : route('home').'#projet-'.$this->record->slug, shouldOpenInNewTab: true),
             DeleteAction::make(),
         ];
     }

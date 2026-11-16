@@ -34,6 +34,9 @@ Site officiel et portfolio d’Arthur Cottey ({!! route('home') !!}). Contenu r�
 @if ($project->url)
 - Site : {!! $project->url !!}
 @endif
+@if ($project->hasCaseStudy())
+- Étude de cas détaillée : {!! route('projects.show', $project) !!}
+@endif
 @if ($project->stack)
 - Technologies : {!! implode(', ', $project->stack) !!}
 @endif
@@ -73,5 +76,8 @@ Site officiel et portfolio d’Arthur Cottey ({!! route('home') !!}). Contenu r�
 ## Pages
 
 - [Accueil]({!! route('home') !!}) : présentation, services, projets, compétences, parcours, FAQ et contact
+@foreach ($projects->filter->hasCaseStudy() as $project)
+- [{!! $project->name !!} — étude de cas]({!! route('projects.show', $project) !!}) : {!! $project->tagline !!}, choix techniques et méthode
+@endforeach
 - [Mentions légales]({!! route('legal-notice') !!})
 - [Politique de confidentialité]({!! route('privacy') !!})

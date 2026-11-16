@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Projects\Schemas;
 use App\Enums\ProjectStatus;
 use App\Models\Project;
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TagsInput;
@@ -69,6 +70,57 @@ class ProjectForm
                                     ->placeholder('Projet personnel : conception, développement, mise en production.')
                                     ->maxLength(200)
                                     ->columnSpanFull(),
+                            ]),
+
+                        Section::make('Étude de cas')
+                            ->description('Page dédiée /projets/… : elle n’est publiée que si ce texte est rempli. Markdown : ## pour un titre, ### pour un sous-titre, - pour une liste.')
+                            ->collapsible()
+                            ->schema([
+                                MarkdownEditor::make('case_study')
+                                    ->hiddenLabel()
+                                    ->toolbarButtons([
+                                        ['bold', 'italic', 'link'],
+                                        ['heading'],
+                                        ['bulletList', 'orderedList', 'codeBlock'],
+                                        ['undo', 'redo'],
+                                    ])
+                                    ->maxLength(30000),
+
+                                Repeater::make('metrics')
+                                    ->label('Chiffres clés')
+                                    ->helperText('Quatre chiffres au plus, affichés en tête de l’étude de cas.')
+                                    ->schema([
+                                        TextInput::make('value')->label('Valeur')->placeholder('1 300+')->required()->maxLength(12),
+                                        TextInput::make('label')->label('Libellé')->placeholder('tests automatisés')->required()->maxLength(60),
+                                    ])
+                                    ->columns(2)
+                                    ->maxItems(4)
+                                    ->reorderableWithButtons()
+                                    ->addActionLabel('Ajouter un chiffre')
+                                    ->defaultItems(0),
+
+                                Repeater::make('gallery')
+                                    ->label('Galerie')
+                                    ->schema([
+                                        FileUpload::make('image')
+                                            ->label('Image')
+                                            ->disk(Project::DISK)
+                                            ->directory('projects')
+                                            ->visibility('public')
+                                            ->image()
+                                            ->acceptedFileTypes(['image/webp', 'image/png', 'image/jpeg'])
+                                            ->maxSize(1024)
+                                            ->required(),
+                                        TextInput::make('caption')
+                                            ->label('Légende')
+                                            ->helperText('Sert aussi de texte alternatif pour l’accessibilité.')
+                                            ->maxLength(200),
+                                    ])
+                                    ->grid(2)
+                                    ->reorderableWithButtons()
+                                    ->collapsible()
+                                    ->addActionLabel('Ajouter une image')
+                                    ->defaultItems(0),
                             ]),
 
                         Section::make('Détails techniques')
