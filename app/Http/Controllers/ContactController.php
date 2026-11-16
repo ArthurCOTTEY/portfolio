@@ -2,41 +2,51 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\ContactRequest;
+use App\Mail\ContactMessage;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\ContactMail;
+use Throwable;
 
 class ContactController extends Controller
 {
-    public function store(Request $request)
+    private const SUCCESS = 'Merci, votre message a bien été envoyé. Je vous réponds au plus vite.';
+
+    private const FAILURE = 'Votre message n’a pas pu être envoyé. Réessayez dans quelques instants ou écrivez-moi directement par e-mail.';
+
+    public function __invoke(ContactRequest $request): JsonResponse|RedirectResponse
     {
-        $validated = $request->validate([
-            'name' => 'required|min:2',
-            'email' => 'required|email',
-            'message' => 'required|min:5',
-        ], [
-            'name.required' => __('form.validation.name_required'),
-            'name.min' => __('form.validation.name_min'),
+        // On simule un succès pour ne pas renseigner les robots.
+        if ($request->isSpam()) {
+            return $this->respond($request, true, self::SUCCESS);
+        }
 
-            'email.required' => __('form.validation.email_required'),
-            'email.email' => __('form.validation.email_email'),
+        try {
+            Mail::to(config('site.email'))->send(new ContactMessage(
+                name: $request->validated('name'),
+                email: $request->validated('email'),
+                body: $request->validated('message'),
+            ));
+        } catch (Throwable $exception) {
+            Log::error('Échec de l’envoi du formulaire de contact', ['exception' => $exception]);
 
-            'message.required' => __('form.validation.message_required'),
-            'message.min' => __('form.validation.message_min'),
-        ]);
+            return $this->respond($request, false, self::FAILURE);
+        }
 
-        Mail::raw(
-            "Nom: {$validated['name']}\nEmail: {$validated['email']}\nMessage:\n{$validated['message']}",
-            function ($message) use ($validated) {
-                $message->to('arthur.cottey1@gmail.com')
-                    ->subject('Contact site')
-                    ->replyTo($validated['email']);
-            }
-        );
+        return $this->respond($request, true, self::SUCCESS);
+    }
 
-        return response()->json([
-            'success' => true,
-            'message' => __('form.contact_section.success')
-        ]);
+    private function respond(ContactRequest $request, bool $success, string $message): JsonResponse|RedirectResponse
+    {
+        if ($request->expectsJson()) {
+            return response()->json(['message' => $message], $success ? 200 : 500);
+        }
+
+        return redirect()
+            ->to(route('home').'#contact')
+            ->with($success ? 'contact.success' : 'contact.error', $message)
+            ->withInput($success ? [] : $request->safe()->only(['name', 'email', 'message']));
     }
 }

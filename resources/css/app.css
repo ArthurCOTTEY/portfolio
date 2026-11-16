@@ -1,58 +1,156 @@
+/* Polices auto-hébergées : aucune requête vers Google Fonts (RGPD + performances). */
+@import '@fontsource-variable/inter/wght.css';
+@import '@fontsource-variable/space-grotesk/wght.css';
+
 @import 'tailwindcss';
 
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../storage/framework/views/*.php';
 @source '../**/*.blade.php';
 @source '../**/*.js';
+@source '../../config/content.php';
 
 @theme {
-    --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
-    --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+    --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+    --font-display: 'Space Grotesk Variable', ui-sans-serif, system-ui, sans-serif;
 }
 
-@layer utilities {
-    .marquee {
-        position: relative;
-        overflow: hidden;
+@layer base {
+    html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 5rem;
+        -webkit-text-size-adjust: 100%;
     }
 
-    .marquee-content {
-        display: flex;
-        animation: marquee 60s linear infinite;
+    body {
+        @apply bg-white font-sans text-black antialiased;
     }
 
-    @keyframes marquee {
-        from {
-            transform: translateX(0);
+    :focus-visible {
+        outline: 3px solid var(--color-black);
+        outline-offset: 3px;
+    }
+
+    ::selection {
+        @apply bg-yellow-400 text-black;
+    }
+
+    [hidden] {
+        display: none !important;
+    }
+}
+
+@layer components {
+    .btn {
+        @apply inline-flex items-center justify-center gap-2 border-2 border-black px-5 py-2.5 text-sm font-semibold transition
+            hover:-translate-y-0.5 hover:bg-black hover:text-white
+            disabled:pointer-events-none disabled:opacity-60;
+    }
+
+    .btn-yellow {
+        @apply bg-yellow-400 text-black;
+    }
+
+    .btn-white {
+        @apply bg-white text-black;
+    }
+
+    .btn-black {
+        @apply bg-black text-white hover:bg-white hover:text-black;
+    }
+
+    .section-title {
+        @apply inline-block border-b-4 pb-1 font-display text-4xl font-bold tracking-tight uppercase md:text-6xl;
+    }
+
+    .eyebrow {
+        @apply font-display text-xs font-semibold tracking-[0.2em] uppercase;
+    }
+
+    .prose-legal {
+        @apply max-w-3xl text-base leading-relaxed md:text-lg;
+
+        & h2 {
+            @apply mt-14 font-display text-2xl font-bold tracking-tight md:text-3xl;
         }
-        to {
-            transform: translateX(-50%);
+
+        & h3 {
+            @apply mt-8 font-display text-lg font-bold;
+        }
+
+        & p,
+        & ul,
+        & table {
+            @apply mt-4;
+        }
+
+        & ul {
+            @apply list-disc space-y-1 pl-6;
+        }
+
+        & a {
+            @apply font-medium underline underline-offset-4 hover:bg-yellow-400;
+        }
+
+        & table {
+            @apply w-full border-2 border-black text-left text-sm;
+        }
+
+        & th,
+        & td {
+            @apply border border-black p-3 align-top;
+        }
+
+        & th {
+            @apply bg-gray-100 font-semibold;
         }
     }
-    .marquee-content:hover {
-        animation-play-state: paused;
+
+    .field {
+        @apply w-full border-2 border-black bg-white p-3 transition outline-none focus:bg-yellow-50 aria-invalid:border-red-600;
     }
-
 }
 
-html {
-    scroll-behavior: smooth;
+/* Bandeaux défilants : le contenu est dupliqué, on translate de la moitié. */
+.marquee-track {
+    animation: marquee var(--marquee-duration, 40s) linear infinite;
 }
 
-a {
-    cursor: pointer
+.marquee:hover .marquee-track {
+    animation-play-state: paused;
+}
+
+@keyframes marquee {
+    to {
+        transform: translateX(-50%);
+    }
 }
 
 @keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-4px); }
-    75% { transform: translateX(4px); }
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-4px);
+    }
+    75% {
+        transform: translateX(4px);
+    }
 }
 
 .shake {
     animation: shake 0.3s ease;
 }
 
-.marqueeEnd {
-    animation: marquee 20s linear infinite;
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
 }

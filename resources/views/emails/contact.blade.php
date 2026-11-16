@@ -1,6 +1,12 @@
-<h2>Nouveau message</h2>
+<x-mail::message>
+# Nouveau message depuis le portfolio
 
-<p><strong>Nom :</strong> {{ $data['name'] }}</p>
-<p><strong>Email :</strong> {{ $data['email'] }}</p>
-<p><strong>Message :</strong></p>
-<p>{{ $data['message'] }}</p>
+**Nom :** {{ $name }}
+**E-mail :** {{ $email }}
+
+<x-mail::panel>
+{!! nl2br(e($body)) !!}
+</x-mail::panel>
+
+Répondez directement à cet e-mail pour écrire à {{ $name }}.
+</x-mail::message>

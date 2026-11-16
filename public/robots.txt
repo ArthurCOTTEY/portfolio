@@ -1,4 +1,26 @@
+# arthurcottey.fr — robots.txt
+# Les moteurs de recherche ET les assistants IA sont les bienvenus.
+# Résumé structuré pour les IA : https://www.arthurcottey.fr/llms.txt
+
 User-agent: *
-Disallow:
+User-agent: Googlebot
+User-agent: Bingbot
+User-agent: GPTBot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: ClaudeBot
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: Google-Extended
+User-agent: Applebot
+User-agent: Applebot-Extended
+User-agent: MistralAI-User
+User-agent: DuckAssistBot
+Allow: /
+Disallow: /admin
+Disallow: /livewire
+Disallow: /contact
 
 Sitemap: https://www.arthurcottey.fr/sitemap.xml

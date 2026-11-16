@@ -2,17 +2,17 @@
 
 namespace App\Providers\Filament;
 
-use Doriiaan\FilamentAstrotomic\FilamentAstrotomicPlugin;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\NavigationItem;
 use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
+use Filament\Support\Icons\Heroicon;
 use Filament\Widgets\AccountWidget;
-use Filament\Widgets\FilamentInfoWidget;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
@@ -29,21 +29,27 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
+            ->brandName('Arthur Cottey — Admin')
+            ->favicon(asset('favicon.svg'))
             ->colors([
                 'primary' => Color::Amber,
+                'gray' => Color::Zinc,
             ])
+            ->spa()
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
             ->pages([
                 Dashboard::class,
             ])
-            ->plugins([
-                FilamentAstrotomicPlugin::make(),
-            ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
             ->widgets([
                 AccountWidget::class,
-                FilamentInfoWidget::class,
+            ])
+            ->navigationItems([
+                NavigationItem::make('Voir le site')
+                    ->url(fn (): string => route('home'), shouldOpenInNewTab: true)
+                    ->icon(Heroicon::OutlinedGlobeAlt)
+                    ->sort(100),
             ])
             ->middleware([
                 EncryptCookies::class,

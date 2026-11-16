@@ -1,41 +1,24 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\SeoController;
+use Illuminate\Support\Facades\Route;
 
-Route::get('/', function (Request $request) {
+Route::get('/', HomeController::class)->name('home');
 
-    $locale = session('locale')
-        ?? substr($request->getPreferredLanguage(['fr', 'en']), 0, 2)
-        ?? 'fr';
+Route::post('/contact', ContactController::class)
+    ->middleware('throttle:contact')
+    ->name('contact.store');
 
-    if (!in_array($locale, ['fr', 'en'])) {
-        $locale = 'fr';
-    }
+Route::view('/politique-de-confidentialite', 'pages.legal.privacy')->name('privacy');
+Route::view('/mentions-legales', 'pages.legal.notice')->name('legal-notice');
 
-    return redirect("/$locale");
-});
+Route::get('/sitemap.xml', [SeoController::class, 'sitemap'])->name('sitemap');
+Route::get('/llms.txt', [SeoController::class, 'llms'])->name('llms');
 
-Route::group(['prefix' => '{locale}'], function () {
-
-    Route::get('/', [HomeController::class, 'index'])->name('home');
-
-    Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
-});
-
-Route::prefix('fr')->group(function () {
-    Route::get('/politique-de-confidentialite', function () {
-        app()->setLocale('fr');
-        return view('legal.privacy');
-    })->name('privacy.fr');
-});
-
-Route::prefix('en')->group(function () {
-    Route::get('/privacy-policy', function () {
-        app()->setLocale('en');
-        return view('legal.privacy');
-    })->name('privacy.en');
-});
-
+// Anciennes URL multilingues : redirections permanentes pour conserver le référencement.
+Route::permanentRedirect('/fr', '/');
+Route::permanentRedirect('/en', '/');
+Route::permanentRedirect('/fr/politique-de-confidentialite', '/politique-de-confidentialite');
+Route::permanentRedirect('/en/privacy-policy', '/politique-de-confidentialite');
