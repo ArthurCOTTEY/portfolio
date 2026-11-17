@@ -40,29 +40,8 @@ Panneau d’administration : `/admin` (gestion des catégories de compétences e
 
 ## Mise en production
 
-Variables à renseigner dans le `.env` de production :
-
-```dotenv
-APP_ENV=production
-APP_DEBUG=false
-APP_URL=https://www.arthurcottey.fr
-APP_LOCALE=fr
-ADMIN_EMAILS=arthur.cottey1@gmail.com
-MATOMO_URL=https://stats.cekale.fr
-MATOMO_SITE_ID=…      # ID du site créé dans Matomo
-LEGAL_HOST_NAME=…      # obligatoire : mentions légales
-LEGAL_HOST_ADDRESS=…
-LEGAL_HOST_PHONE=…
-```
-
-Puis :
-
-```bash
-composer install --no-dev --optimize-autoloader
-php artisan migrate --force
-npm ci && npm run build
-php artisan optimize
-```
+Hébergement O2Switch : procédure complète (cPanel, `.env`, premier déploiement) dans
+[`docs/DEPLOIEMENT.md`](docs/DEPLOIEMENT.md). Mises à jour : `bash scripts/deploy.sh`.
 
 ## Tests
 

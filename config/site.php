@@ -52,10 +52,10 @@ return [
     | Mentions légales (art. 6-III de la LCEN) : l'hébergeur doit être identifié.
     */
     'host' => [
-        'name' => env('LEGAL_HOST_NAME'),
-        'address' => env('LEGAL_HOST_ADDRESS'),
-        'phone' => env('LEGAL_HOST_PHONE'),
-        'url' => env('LEGAL_HOST_URL'),
+        'name' => env('LEGAL_HOST_NAME', 'O2SWITCH (SAS)'),
+        'address' => env('LEGAL_HOST_ADDRESS', '222-224 Boulevard Gustave Flaubert, 63000 Clermont-Ferrand, France'),
+        'phone' => env('LEGAL_HOST_PHONE', '04 44 44 60 40'),
+        'url' => env('LEGAL_HOST_URL', 'https://www.o2switch.fr'),
     ],
 
     // Date affichée sur les pages légales.
