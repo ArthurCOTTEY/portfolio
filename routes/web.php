@@ -12,7 +12,7 @@ Route::post('/contact', ContactController::class)
     ->middleware('throttle:contact')
     ->name('contact.store');
 
-Route::get('/projets/{project:slug}', ProjectController::class)->name('projects.show');
+Route::get('/projets/{slug}', ProjectController::class)->where('slug', '[a-z0-9-]+')->name('projects.show');
 
 Route::view('/politique-de-confidentialite', 'pages.legal.privacy')->name('privacy');
 Route::view('/mentions-legales', 'pages.legal.notice')->name('legal-notice');

@@ -47,16 +47,6 @@ return [
             'report' => false,
         ],
 
-        // Visuels gérés depuis l'admin, servis directement (pas de lien symbolique requis).
-        'media' => [
-            'driver' => 'local',
-            'root' => public_path('media'),
-            'url' => rtrim(env('APP_URL', 'http://localhost'), '/').'/media',
-            'visibility' => 'public',
-            'throw' => false,
-            'report' => false,
-        ],
-
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),

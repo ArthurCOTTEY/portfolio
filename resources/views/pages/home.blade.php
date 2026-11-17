@@ -257,7 +257,7 @@
                                     @if ($project->hasCaseStudy() || $project->url || $project->repository_url)
                                         <div class="mt-8 flex flex-wrap gap-3 lg:mt-auto lg:pt-8">
                                             @if ($project->hasCaseStudy())
-                                                <a href="{{ route('projects.show', $project) }}" class="btn btn-black">
+                                                <a href="{{ route('projects.show', $project->slug) }}" class="btn btn-black">
                                                     Lire l’étude de cas <span aria-hidden="true">→</span>
                                                 </a>
                                             @endif

@@ -32,15 +32,6 @@ return [
         'country' => 'FR',
     ],
 
-    /*
-    | Adresses autorisées à se connecter au panneau Filament (/admin).
-    | Séparées par des virgules dans ADMIN_EMAILS.
-    */
-    'admin_emails' => array_filter(array_map(
-        'trim',
-        explode(',', (string) env('ADMIN_EMAILS', env('CONTACT_EMAIL', 'arthur.cottey1@gmail.com')))
-    )),
-
     'analytics' => [
         // Matomo sans cookie (exempté de consentement) : inactif tant que l'URL et l'ID sont vides.
         'matomo_url' => env('MATOMO_URL'),

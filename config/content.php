@@ -78,4 +78,88 @@ return [
         ],
     ],
 
+    /*
+    | Compétences affichées dans « Ce que je maîtrise ». Icônes : public/images/skills
+    | (logos Simple Icons, licence CC0).
+    */
+    'skills' => [
+        [
+            'name' => 'Back-end',
+            'description' => 'Applications, API et logique métier robustes, testées et maintenables.',
+            'items' => [
+                ['name' => 'PHP', 'icon' => 'php'],
+                ['name' => 'Laravel', 'icon' => 'laravel'],
+                ['name' => 'MySQL', 'icon' => 'mysql'],
+            ],
+        ],
+        [
+            'name' => 'Front-end',
+            'description' => 'Interfaces rapides, accessibles et responsives.',
+            'items' => [
+                ['name' => 'JavaScript', 'icon' => 'javascript'],
+                ['name' => 'TypeScript', 'icon' => 'typescript'],
+                ['name' => 'Vue.js', 'icon' => 'vuejs'],
+                ['name' => 'Nuxt', 'icon' => 'nuxt'],
+                ['name' => 'React', 'icon' => 'react'],
+                ['name' => 'Inertia.js', 'icon' => 'inertia'],
+                ['name' => 'Tailwind CSS', 'icon' => 'tailwind-css'],
+            ],
+        ],
+        [
+            'name' => 'Outils',
+            'description' => 'Un workflow fiable, du développement à la mise en ligne.',
+            'items' => [
+                ['name' => 'Git', 'icon' => 'git'],
+                ['name' => 'GitHub Actions', 'icon' => 'github-actions'],
+                ['name' => 'Composer', 'icon' => 'composer'],
+                ['name' => 'Vite', 'icon' => 'vite'],
+            ],
+        ],
+    ],
+
+    /*
+    | Projets. L'étude de cas (page /projets/{slug}) est le fichier Markdown indiqué ;
+    | sans fichier, le projet n'a pas de page dédiée. Images : public/media/projects.
+    */
+    'projects' => [
+        [
+            'slug' => 'cekale',
+            'name' => 'Cekale',
+            'tagline' => 'Prise de rendez-vous en ligne pour les professionnels',
+            'description' => 'Cekale est un logiciel de réservation en ligne pour les indépendants, salons, instituts et cabinets qui reçoivent sur rendez-vous : coiffeurs, barbiers, esthéticiennes, coachs, tatoueurs… Les clients réservent seuls, 24 h/24, depuis une page à partager ; l’équipe gère un agenda commun synchronisé avec Google et Apple, et les rappels automatiques limitent les rendez-vous non honorés.',
+            'role' => 'Projet personnel : conception, développement full stack, design et mise en production.',
+            'status' => 'online',
+            'year' => 2026,
+            'published_at' => '2026-11-16',
+            'url' => 'https://www.cekale.fr',
+            'repository_url' => null,
+            'image' => 'media/projects/cekale.webp',
+            'case_study' => 'projects/cekale.md',
+            'highlights' => [
+                'Calcul des créneaux libres sans double réservation : praticiens, cabines et salles, séances de groupe',
+                'Agenda d’équipe synchronisé avec Google Agenda et Apple iCloud',
+                'Acompte en ligne avec Stripe Connect, carte de fidélité, avis clients et liste d’attente',
+                'Application installable (PWA) avec notifications push',
+                'Widget de réservation à intégrer sur WordPress, Wix ou Squarespace',
+                'Site vitrine pensé pour le référencement : pages métiers, blog, données structurées et llms.txt',
+                'Sécurité : double authentification, passkeys et conformité RGPD',
+            ],
+            'stack' => ['Laravel 13', 'PHP 8.4', 'React 19', 'TypeScript', 'Inertia.js', 'Tailwind CSS', 'shadcn/ui', 'Stripe Connect', 'Pest', 'PHPStan'],
+            'metrics' => [
+                ['value' => '55', 'label' => 'fonctionnalités livrées'],
+                ['value' => '1 300+', 'label' => 'tests automatisés'],
+                ['value' => '53', 'label' => 'décisions techniques documentées'],
+                ['value' => '15', 'label' => 'métiers accompagnés'],
+            ],
+            'gallery' => [
+                ['image' => 'media/projects/cekale/reservation.webp', 'caption' => 'La page de réservation : le client choisit sa prestation et son créneau, sans créer de compte.'],
+                ['image' => 'media/projects/cekale/agenda.webp', 'caption' => 'L’agenda d’équipe, synchronisé avec Google Agenda et Apple iCloud.'],
+                ['image' => 'media/projects/cekale/pilotage.webp', 'caption' => 'Le tableau de bord : rendez-vous du jour, demandes à traiter et chiffres du mois.'],
+                ['image' => 'media/projects/cekale/personnalisation.webp', 'caption' => 'Options et prestations enchaînées, avec le total de la durée et du prix.'],
+                ['image' => 'media/projects/cekale/calendriers.webp', 'caption' => 'Chaque praticien connecte ses propres calendriers.'],
+                ['image' => 'media/projects/cekale/securite.webp', 'caption' => 'Double authentification, passkeys et données isolées par établissement.'],
+            ],
+        ],
+    ],
+
 ];

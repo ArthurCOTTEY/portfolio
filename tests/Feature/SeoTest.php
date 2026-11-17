@@ -1,7 +1,5 @@
 <?php
 
-use App\Models\SkillCategory;
-
 it('génère un sitemap XML', function () {
     $this->get('/sitemap.xml')
         ->assertOk()
@@ -12,8 +10,6 @@ it('génère un sitemap XML', function () {
 });
 
 it('génère un llms.txt à jour', function () {
-    SkillCategory::factory()->create(['name' => 'Front-end'])->skills()->create(['name' => 'Vue.js']);
-
     $this->get('/llms.txt')
         ->assertOk()
         ->assertHeader('Content-Type', 'text/plain; charset=UTF-8')

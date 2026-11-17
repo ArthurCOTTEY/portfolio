@@ -2,7 +2,7 @@
 
 Portfolio d’Arthur Cottey, développeur web full stack PHP & Laravel à Tours.
 
-**Stack :** Laravel 13 · Filament 5 (admin) · Tailwind CSS 4 · Vite · Pest
+**Stack :** Laravel 13 · Tailwind CSS 4 · Vite · Pest
 
 ## Installation locale
 
@@ -11,12 +11,13 @@ composer install
 npm install
 cp .env.example .env && php artisan key:generate
 touch database/database.sqlite
-php artisan migrate --seed   # données de démo + compte admin@example.com / password
+php artisan migrate
 npm run build                # ou npm run dev
 php artisan serve
 ```
 
-Panneau d’administration : `/admin` (gestion des catégories de compétences et de leurs icônes).
+Tout le contenu (services, compétences, projets, parcours, FAQ) est versionné dans
+`config/content.php` ; les études de cas sont en Markdown dans `resources/content/projects/`.
 
 ## Organisation
 
@@ -26,8 +27,8 @@ Panneau d’administration : `/admin` (gestion des catégories de compétences e
 | Services, parcours, FAQ (page + JSON-LD + llms.txt) | `config/content.php` |
 | Pages | `resources/views/pages` |
 | Mesure d’audience (Matomo) | `app/Support/Analytics.php`, `resources/js/modules/analytics.js` |
-| Compétences et projets (admin) | `app/Filament/Resources` |
-| Visuels des projets | `public/media/projects` (disque `media`, servi sans lien symbolique) |
+| Compétences et projets | `config/content.php` (icônes : `public/images/skills`, logos Simple Icons CC0) |
+| Visuels des projets | `public/media/projects` |
 | Sitemap et llms.txt (générés) | `app/Http/Controllers/SeoController.php` |
 
 ## Mesure d’audience et RGPD

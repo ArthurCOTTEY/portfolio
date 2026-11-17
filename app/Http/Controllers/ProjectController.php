@@ -2,18 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Project;
+use App\Content\Project;
 use Illuminate\View\View;
 
 class ProjectController extends Controller
 {
-    public function __invoke(Project $project): View
+    public function __invoke(string $slug): View
     {
-        abort_unless($project->is_published && $project->hasCaseStudy(), 404);
+        $project = Project::find($slug);
+
+        abort_unless($project?->hasCaseStudy(), 404);
 
         return view('pages.project', [
             'project' => $project,
-            'otherProjects' => Project::query()->forDisplay()->whereKeyNot($project->getKey())->get(),
+            'otherProjects' => Project::all()->reject(fn (Project $other) => $other->slug === $project->slug),
         ]);
     }
 }

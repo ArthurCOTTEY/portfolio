@@ -94,7 +94,6 @@ git merge --ff-only --quiet "origin/$BRANCH"
 composer install --no-dev --optimize-autoloader --no-interaction --no-progress --quiet
 php artisan optimize:clear
 php artisan migrate --force
-php artisan filament:optimize
 php artisan optimize
 
 {

@@ -5,7 +5,7 @@
 @section('og_type', 'article')
 
 @php
-    $url = route('projects.show', $project);
+    $url = route('projects.show', $project->slug);
     $personId = route('home').'#arthur-cottey';
     $gallery = $project->galleryItems();
 @endphp
@@ -195,7 +195,7 @@
         @if ($otherProjects->isNotEmpty())
             <p class="mt-10 text-sm">Autres projets :
                 @foreach ($otherProjects as $other)
-                    <a href="{{ $other->hasCaseStudy() ? route('projects.show', $other) : route('home').'#projet-'.$other->slug }}" class="underline underline-offset-4">{{ $other->name }}</a>@if (! $loop->last), @endif
+                    <a href="{{ $other->hasCaseStudy() ? route('projects.show', $other->slug) : route('home').'#projet-'.$other->slug }}" class="underline underline-offset-4">{{ $other->name }}</a>@if (! $loop->last), @endif
                 @endforeach
             </p>
         @endif

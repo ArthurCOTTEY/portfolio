@@ -66,7 +66,6 @@ MAIL_PASSWORD=…
 MAIL_FROM_ADDRESS=contact@arthurcottey.fr
 MAIL_FROM_NAME="Arthur Cottey"
 
-ADMIN_EMAILS=arthur.cottey1@gmail.com
 MATOMO_URL=https://stats.cekale.fr
 MATOMO_SITE_ID=…                 # ID du site créé dans Matomo
 ```
@@ -74,10 +73,8 @@ MATOMO_SITE_ID=…                 # ID du site créé dans Matomo
 Puis :
 
 ```bash
-php artisan migrate --force          # tables + projet Cekale
-php artisan filament:optimize
+php artisan migrate --force          # sessions, cache, files d’attente
 php artisan optimize
-php artisan make:filament-user       # compte de l’admin (même e-mail que ADMIN_EMAILS)
 ```
 
 **Images de la page d’accueil** : envoyer `image_hero.webp` (638 × 456) et `image_about.webp`
@@ -88,7 +85,6 @@ scp image_hero.webp image_about.webp arthurcottey:~/portfolio/public/storage/
 ```
 
 > Ne pas lancer `php artisan storage:link` : `public/storage` est un vrai dossier du dépôt.
-> Les icônes des compétences s’envoient depuis l’admin.
 
 ## 4. Brancher le domaine (cPanel)
 
@@ -97,7 +93,6 @@ _Domaines_ → `arthurcottey.fr` → **racine du document** : `/home/cpaneluser/
 Vérifier ensuite :
 
 - `https://www.arthurcottey.fr` s’affiche, `http://arthurcottey.fr` y redirige ;
-- `/admin` : connexion avec le compte créé ;
 - le formulaire de contact envoie bien un e-mail ;
 - `/sitemap.xml` et `/llms.txt` répondent.
 

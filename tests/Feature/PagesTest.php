@@ -1,23 +1,26 @@
 <?php
 
-use App\Models\SkillCategory;
 use App\Support\Analytics;
-use Illuminate\Support\Facades\Storage;
 
 it('affiche la page d’accueil avec les compétences', function () {
-    SkillCategory::factory()
-        ->create(['name' => 'Back-end'])
-        ->skills()->create(['name' => 'Laravel']);
-
     $this->get('/')
         ->assertOk()
         ->assertSee('<html lang="fr-FR">', false)
         ->assertSee('Arthur Cottey')
         ->assertSee('Back-end')
         ->assertSee('Laravel')
+        ->assertSee('/images/skills/laravel.svg', false)
         ->assertSee('application/ld+json', false)
         ->assertSee('<link rel="canonical"', false)
         ->assertDontSee('fonts.googleapis.com');
+});
+
+it('a une icône pour chaque compétence', function () {
+    foreach (config('content.skills') as $category) {
+        foreach ($category['items'] as $skill) {
+            expect(public_path("images/skills/{$skill['icon']}.svg"))->toBeFile();
+        }
+    }
 });
 
 it('affiche les pages légales', function (string $url, string $title) {
@@ -70,16 +73,3 @@ it('ignore une configuration Matomo invalide', function (?string $url, ?string $
     'ID invalide' => ['https://stats.example.fr', 'abc'],
     'URL vide' => [null, '1'],
 ]);
-
-it('intègre les icônes de compétences sans lien symbolique', function () {
-    Storage::fake('public')->put('skills-icons/php.svg', '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1 1"/>');
-
-    SkillCategory::factory()->create()->skills()->createMany([
-        ['name' => 'PHP', 'image' => 'skills-icons/php.svg'],
-        ['name' => 'Sans icône', 'image' => 'skills-icons/absente.svg'],
-    ]);
-
-    $this->get('/')->assertOk()
-        ->assertSee('src="data:image/svg+xml;base64,', false)
-        ->assertSee('Sans icône');
-});

@@ -2,10 +2,7 @@
 
 namespace App\Enums;
 
-use Filament\Support\Contracts\HasColor;
-use Filament\Support\Contracts\HasLabel;
-
-enum ProjectStatus: string implements HasColor, HasLabel
+enum ProjectStatus: string
 {
     case Online = 'online';
     case InProgress = 'in_progress';
@@ -17,15 +14,6 @@ enum ProjectStatus: string implements HasColor, HasLabel
             self::Online => 'En ligne',
             self::InProgress => 'En cours',
             self::Archived => 'Archivé',
-        };
-    }
-
-    public function getColor(): string
-    {
-        return match ($this) {
-            self::Online => 'success',
-            self::InProgress => 'warning',
-            self::Archived => 'gray',
         };
     }
 

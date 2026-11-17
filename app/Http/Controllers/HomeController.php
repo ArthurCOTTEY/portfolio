@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Project;
-use App\Models\SkillCategory;
+use App\Content\Project;
+use App\Content\Skills;
 use Illuminate\View\View;
 
 class HomeController extends Controller
@@ -11,8 +11,8 @@ class HomeController extends Controller
     public function __invoke(): View
     {
         return view('pages.home', [
-            'projects' => Project::query()->forDisplay()->get(),
-            'skillCategories' => SkillCategory::query()->forDisplay()->get(),
+            'projects' => Project::all(),
+            'skillCategories' => Skills::categories(),
         ]);
     }
 }
